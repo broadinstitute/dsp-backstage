@@ -3,11 +3,9 @@ kind: Component
 metadata:
   name: foundation
   description: An example of a Backstage application.
-  # Example for optional annotations
-  # annotations:
-  #   github.com/project-slug: backstage/backstage
-  #   backstage.io/techdocs-ref: dir:.
+  annotations:
+    github.com/project-slug: broadinstitute/foundation
 spec:
   type: website
-  owner: john@example.com
+  owner: dsp-devops@broadinstitute.org
   lifecycle: experimental
