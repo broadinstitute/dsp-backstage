@@ -38,4 +38,4 @@ jobs:
       - name: Run lint
         run: yarn lint:all
       - name: Run prettier
-        run: yarn prettier:all
+        run: yarn prettier:check
