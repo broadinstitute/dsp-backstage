@@ -80,7 +80,7 @@ scaffolder:
 
 catalog:
   import:
-    entityFilename: catalog-info.yaml
+    entityFilename: foundation.yaml
     pullRequestBranchName: backstage-integration
   rules:
     - allow: [Component, System, API, Resource, Location]
