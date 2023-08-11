@@ -13,6 +13,10 @@ backend:
   # all interfaces, the most permissive setting. The right value depends on your specific deployment.
   listen: ':8080'
 
+  cors:
+    origin: ${BACKSTAGE_APPLICATION_BASE_URL}
+    methods: [GET, HEAD, PATCH, POST, PUT, DELETE]
+    credentials: true
   # config options: https://node-postgres.com/api/client
   database:
     client: pg
