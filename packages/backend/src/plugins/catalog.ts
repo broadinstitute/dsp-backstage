@@ -1,6 +1,6 @@
 import { CatalogBuilder } from '@backstage/plugin-catalog-backend';
 import { ScaffolderEntitiesProcessor } from '@backstage/plugin-scaffolder-backend';
-import { GithubEntityProvider } from '@backstage/plugin-catalog-backend-module-github';
+// import { GithubEntityProvider } from '@backstage/plugin-catalog-backend-module-github';
 import { Router } from 'express';
 import { PluginEnvironment } from '../types';
 
