@@ -1,10 +1,10 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: foundation
-  description: An example of a Backstage application.
+  name: dsp-backstage
+  description: DSP's Backstage instance
   annotations:
-    github.com/project-slug: broadinstitute/foundation
+    github.com/project-slug: broadinstitute/dsp-backstage
 spec:
   type: website
   owner: dsp-devops@broadinstitute.org

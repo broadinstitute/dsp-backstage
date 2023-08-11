@@ -33,3 +33,11 @@ catalog:
   # See https://backstage.io/docs/features/software-catalog/#adding-components-to-the-catalog for more details
   # on how to get entities into the catalog.
   locations: []
+
+auth:
+  environment: prod
+  providers:
+    github:
+      prod:
+        clientId: ${BACKSTAGE_AUTH_GITHUB_CLIENT_ID}
+        clientSecret: ${BACKSTAGE_AUTH_GITHUB_CLIENT_SECRET}
