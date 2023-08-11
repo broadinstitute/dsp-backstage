@@ -8,16 +8,16 @@ export default async function createPlugin(
   env: PluginEnvironment,
 ): Promise<Router> {
   const builder = await CatalogBuilder.create(env);
-  builder.addEntityProvider(
-    GithubEntityProvider.fromConfig(env.config, {
-      logger: env.logger,
-      schedule: env.scheduler.createScheduledTaskRunner({
-        frequency: {minutes: 30},
-        timeout: {minutes: 3},
-      }),
-      scheduler: env.scheduler,
-    }),
-  );
+  // builder.addEntityProvider(
+  //   GithubEntityProvider.fromConfig(env.config, {
+  //     logger: env.logger,
+  //     schedule: env.scheduler.createScheduledTaskRunner({
+  //       frequency: {minutes: 30},
+  //       timeout: {minutes: 3},
+  //     }),
+  //     scheduler: env.scheduler,
+  //   }),
+  // );
   builder.addProcessor(new ScaffolderEntitiesProcessor());
   const { processingEngine, router } = await builder.build();
   await processingEngine.start();
