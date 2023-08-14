@@ -73,7 +73,6 @@ auth:
       development:
         clientId: ${BACKSTAGE_AUTH_GITHUB_CLIENT_ID}
         clientSecret: ${BACKSTAGE_AUTH_GITHUB_CLIENT_SECRET}
-      
 
 scaffolder:
   # see https://backstage.io/docs/features/software-templates/configuration for software template options
@@ -112,4 +111,4 @@ catalog:
           frequency: { hours: 6 }
           # supports ISO duration, "human duration" as used in code
           timeout: { minutes: 3 }
-          initialDelay: { minutes: 5 }      
+          initialDelay: { minutes: 5 }
