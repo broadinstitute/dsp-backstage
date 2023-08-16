@@ -7,5 +7,5 @@ metadata:
     github.com/project-slug: broadinstitute/dsp-backstage
 spec:
   type: website
-  owner: dsp-devops@broadinstitute.org
+  owner: dsp-devops
   lifecycle: experimental
