@@ -27,7 +27,7 @@ export default async function createPlugin(
       schedule: env.scheduler.createScheduledTaskRunner({
         frequency: { hours: 6 },
         timeout: { minutes: 3 },
-        initialDelay: { seconds: 30 },
+        initialDelay: {minutes: 5 },
       }),
     }),
     GithubOrgEntityProvider.fromConfig(env.config, {
@@ -37,7 +37,7 @@ export default async function createPlugin(
       schedule: env.scheduler.createScheduledTaskRunner({
         frequency: { hours: 6 },
         timeout: { minutes: 3 },
-        initialDelay: { seconds: 30 },
+        initialDelay: {minutes: 5 },
       }),
     }),
   );
