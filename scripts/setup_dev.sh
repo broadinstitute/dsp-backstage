@@ -1,5 +1,18 @@
 #!/usr/bin/env sh
 
+# test if vault is installed
+if ! command -v vault &> /dev/null
+then
+    echo "vault could not be found"
+    exit
+fi
+
+# test ~/.backstage-github-token exists
+if [ ! -f ~/.backstage-github-token ]; then
+  echo "File ~/.backstage-github-token does not exist. Please create it and add your GitHub token. see README.md for more info."
+  exit
+fi
+
 # This script is used to setup the environment for the project.
 export POSTGRES_HOST="${POSTGRES_HOST:-localhost}"
 export POSTGRES_PORT="${POSTGRES_PORT:-5432}"
@@ -7,7 +20,7 @@ export POSTGRES_USER="${POSTGRES_USER:-backstage}"
 export POSTGRES_PASSWORD="${POSTGRES_PASSWORD:-password}"
 export BACKSTAGE_AUTH_GITHUB_CLIENT_ID="$(VAULT_ADDR='https://clotho.broadinstitute.org:8200' vault read -field=clientId secret/suitable/backstage/local/github-oauth)"
 export BACKSTAGE_AUTH_GITHUB_CLIENT_SECRET="$(VAULT_ADDR='https://clotho.broadinstitute.org:8200' vault read -field=clientSecret secret/suitable/backstage/local/github-oauth)"
-export BACKSTAGE_GITHUB_TOKEN="$(VAULT_ADDR='https://clotho.broadinstitute.org:8200' vault read -field=mf-dev secret/suitable/backstage/common/github-token)"
+export BACKSTAGE_GITHUB_TOKEN="$(cat ~/.backstage-github-token)"
 export LOG_LEVEL="${LOG_LEVEL:-info}"
 
 # if docker container is not running start it
