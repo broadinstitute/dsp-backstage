@@ -21,7 +21,7 @@ environment, additional confiugration may be needed. Documentation for this helm
 
 
 This will use a local postgres docker container for the backing data store. Running this command expects
-the user to have the `vault` cli tool installed and be able to access DSP's vault instance See our [onboarding doc])https://docs.google.com/document/d/11pZE-GqeZFeSOG0UpGg_xyTDQpgBRfr0MLxpxvvQgEw/edit#heading=h.trehvi2yr632)
+the user to have the `vault` cli tool installed and be able to access DSP's vault instance See our [onboarding doc](https://docs.google.com/document/d/11pZE-GqeZFeSOG0UpGg_xyTDQpgBRfr0MLxpxvvQgEw/edit#heading=h.trehvi2yr632)
 for more detailed on getting setup with vault.
 
 The [official backstage docs](https://backstage.io/docs/overview/what-is-backstage/) are the best source for more detailed info on developing backstage.
