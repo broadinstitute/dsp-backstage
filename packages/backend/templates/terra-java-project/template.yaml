@@ -2,27 +2,73 @@ apiVersion: scaffolder.backstage.io/v1beta3
 # https://backstage.io/docs/features/software-catalog/descriptor-format#kind-template
 kind: Template
 metadata:
-  name: example-nodejs-template
-  title: Example Node.js Template
-  description: An example template for the scaffolder that creates a simple Node.js service
+  name: terra-java-project-template
+  title: Terra Java Project Template
+  description: A template for spinning up springboot project for a Terra Service
+  tags:
+    - terra
+    - java
+    - springboot
+    - dsp
 spec:
-  owner: user:guest
+  owner: user:dvoet
   type: service
 
   # These parameters are used to generate the input form in the frontend, and are
   # used to gather input data for the execution of the template.
   parameters:
-    - title: Fill in some steps
+    - title: Project Information
       required:
         - name
+        - visibility
+        - projectSlug
       properties:
         name:
           title: Name
           type: string
           description: Unique name of the component
+          ui:placholder: terra-javatemplate-service
           ui:autofocus: true
+        projectSlug:
+          title: Project Slug
+          type: string
+          description: A Short one word name for the project used in infrastructure representations. NO HYPHENS!
+          ui:placholder: shortname
           ui:options:
             rows: 5
+        visibility:
+          title: Repo Visibility
+          type: string
+          description: Should the repo be public or private?
+          default: public
+          enum:
+            - public
+            - private
+          enumNames:
+            - Public
+            - Private
+    - title: Choose an Owner
+      required: 
+        - owner
+        - organization
+      properties:
+        organization:
+          title : Organization
+          type: string
+          description: Github organization where the repository will be created
+          default: databiosphere
+          enum:
+            - databiosphere
+            - broadinstitute
+          enumNames:
+            - Data Biosphere
+            - Broad Institute
+        owner:
+          title: Team
+          type: string
+          description: Github user or team that will own the repository
+          ui:autofocus: true
+          ui:placeholder: github-team
     - title: Choose a location
       required:
         - repoUrl
@@ -34,6 +80,9 @@ spec:
           ui:options:
             allowedHosts:
               - github.com
+            allowedOwners:
+              - databiosphere
+              - broadinstitute
 
   # These steps are executed in the scaffolder backend, using data that we gathered
   # via the parameters above.
@@ -43,9 +92,13 @@ spec:
       name: Fetch Base
       action: fetch:template
       input:
-        url: ./content
+        url: https://github.com/DataBiosphere/terra-java-project-cookiecutter
         values:
           name: ${{ parameters.name }}
+          owner: ${{ parameters.owner }}
+          projectSlug: ${{ parameters.projectSlug }}
+          organization: ${{ parameters.organization }}
+          catalogInfoFileName: foundation
 
     # This step publishes the contents of the working directory to GitHub.
     - id: publish
@@ -55,6 +108,9 @@ spec:
         allowedHosts: ['github.com']
         description: This is ${{ parameters.name }}
         repoUrl: ${{ parameters.repoUrl }}
+        repoVisibility: ${{ parameters.visibility }}
+        defaultBranch: main
+        access: ${{ parameters.organization }}/${{ parameters.owner }}
 
     # The final step is to register our new component in the catalog.
     - id: register

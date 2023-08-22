@@ -77,14 +77,21 @@ auth:
 
 scaffolder:
   # see https://backstage.io/docs/features/software-templates/configuration for software template options
+  defaultAuthor:
+    name: broadbot
+    email: broadbot@broadinstitute.org
+  defaultCommitMessage: 'Repository Scaffolding from Backstage'
+    
 
 catalog:
   import:
     entityFilename: foundation.yaml
     pullRequestBranchName: backstage-integration
   rules:
-    - allow: [Component, System, API, Resource, Location]
-  locations: []
+    - allow: [Component, System, API, Resource, Location, Template]
+  locations:
+    - type: file
+      target: templates/terra-java-project/template.yaml
   providers:
     github:
       broadinstituteProvider:
