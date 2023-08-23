@@ -62,7 +62,7 @@ spec:
       action: catalog:register
       input:
         repoContentsUrl: ${{ steps['publish'].output.repoContentsUrl }}
-        catalogInfoPath: '/catalog-info.yaml'
+        catalogInfoPath: '/foundation.yaml'
 
   # Outputs are displayed to the user after a successful execution of the template.
   output:
