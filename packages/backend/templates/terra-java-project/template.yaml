@@ -26,13 +26,13 @@ spec:
         name:
           title: Name
           type: string
-          description: Unique name of the component
+          description: Unique name of the project. This will be used in the repository name and in the docker image name.
           ui:placholder: terra-javatemplate-service
           ui:autofocus: true
         projectSlug:
           title: Project Slug
           type: string
-          description: A Short one word name for the project used in infrastructure representations. NO HYPHENS!
+          description: A short one word name for the project used in infrastructure representations. NO HYPHENS!
           ui:placholder: shortname
           ui:options:
             rows: 5
@@ -69,20 +69,6 @@ spec:
           description: Github user or team that will own the repository
           ui:autofocus: true
           ui:placeholder: github-team
-    - title: Choose a location
-      required:
-        - repoUrl
-      properties:
-        repoUrl:
-          title: Repository Location
-          type: string
-          ui:field: RepoUrlPicker
-          ui:options:
-            allowedHosts:
-              - github.com
-            allowedOwners:
-              - databiosphere
-              - broadinstitute
 
   # These steps are executed in the scaffolder backend, using data that we gathered
   # via the parameters above.
@@ -107,10 +93,21 @@ spec:
       input:
         allowedHosts: ['github.com']
         description: This is ${{ parameters.name }}
-        repoUrl: ${{ parameters.repoUrl }}
+        repoUrl: 'github.com?repo=${{ parameters.name }}&owner=${{ parameters.organization }}'
         repoVisibility: ${{ parameters.visibility }}
         defaultBranch: main
         access: ${{ parameters.organization }}/${{ parameters.owner }}
+        requiredApprovingReviewCount: 2
+        allowMergeCommit: false
+        allowSquashMerge: true
+        allowRebaseMerge: false
+        collaborators:
+          - access: admin
+            team: databiosphere/broad-devops
+          - access: write
+            team: BroadWrite
+          - access: admin
+            user: dsp-atlantis
 
     # The final step is to register our new component in the catalog.
     - id: register
