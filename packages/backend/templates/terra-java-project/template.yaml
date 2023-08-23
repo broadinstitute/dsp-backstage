@@ -48,12 +48,12 @@ spec:
             - Public
             - Private
     - title: Choose an Owner
-      required: 
+      required:
         - owner
         - organization
       properties:
         organization:
-          title : Organization
+          title: Organization
           type: string
           description: Github organization where the repository will be created
           default: databiosphere
