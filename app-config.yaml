@@ -90,7 +90,7 @@ catalog:
     - allow: [Component, System, API, Resource, Location, Template]
   locations:
     - type: file
-      target: templates/terra-java-project/template.yaml
+      target: ../../templates/terra-java-project/template.yaml
   providers:
     github:
       broadinstituteProvider:
