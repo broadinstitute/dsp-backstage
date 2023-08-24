@@ -38,7 +38,7 @@ catalog:
   # on how to get entities into the catalog.
   locations:
     - type: url
-      target: https://github.com/broadinstitute/dsp-backstage/blob/main/packages/backend/templates/terra-java-project.yaml
+      target: https://github.com/broadinstitute/dsp-backstage/blob/main/packages/backend/templates/terra-java-project/template.yaml
       rules:
         - allow: [Template]
 auth:
