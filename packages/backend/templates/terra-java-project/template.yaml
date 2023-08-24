@@ -67,8 +67,12 @@ spec:
           title: Team
           type: string
           description: Github user or team that will own the repository
+          ui:field: OwnerPicker
           ui:autofocus: true
           ui:placeholder: github-team
+          ui:options:
+            catalogFilter:
+              kind: [Group]
 
   # These steps are executed in the scaffolder backend, using data that we gathered
   # via the parameters above.
