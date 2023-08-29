@@ -25,13 +25,6 @@ export const GithubTeamPickerFieldSchema = makeFieldSchemaFromZod(
             .describe(
                 'The default namespace to use when the user does not specify on',
             ),
-        catalogFilter: z
-            .array(githubTeamQueryFilterExpression)
-            .or(githubTeamQueryFilterExpression)
-            .optional()
-            .describe(
-                'An optional filter to apply to the catalog entities that are shown in the picker',
-            ),
     })
 );
 

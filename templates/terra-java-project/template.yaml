@@ -68,9 +68,6 @@ spec:
           type: string
           description: Github team that will own the repository
           ui:field: GithubTeamPicker
-          ui:options:
-            catalogFilter:
-              kind: [Group]
 
   # These steps are executed in the scaffolder backend, using data that we gathered
   # via the parameters above.

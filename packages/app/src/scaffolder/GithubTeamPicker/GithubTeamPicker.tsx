@@ -20,10 +20,7 @@ import {
   import React, { useCallback, useEffect } from 'react';
   import useAsync from 'react-use/lib/useAsync';
   import {
-    GithubTeamPickerFilterQueryValue,
     GithubTeamPickerProps,
-    GithubTeamPickerUiOptions,
-    GithubTeamPickerFilterQuery,
   } from './schema';
 import { scaffolderPlugin } from '@backstage/plugin-scaffolder';
 import { createScaffolderFieldExtension} from '@backstage/plugin-scaffolder-react';
@@ -40,14 +37,12 @@ export const GithubTeamPicker = (props: GithubTeamPickerProps) => {
         formData,
         idSchema,
     } = props;
-
-    const catalogFilter = buildCatalogFilter(uiSchema);
-    const defaultNamespace = uiSchema['ui:options']?.defaultNamespace || undefined;
-
     const catalogApi = useApi(catalogApiRef);
+    const defaultNamespace = uiSchema['ui:options']?.defaultNamespace || 'default';
+
     const { value: entities, loading } = useAsync(async () => {
         const { items } = await catalogApi.getEntities(
-            catalogFilter ? { filter: catalogFilter } : undefined,
+            {filter: {kind: ['Group']}}, undefined,
         );
         return items;
     });
@@ -144,72 +139,6 @@ export const GithubTeamPicker = (props: GithubTeamPickerProps) => {
         </FormControl>
     );
 };
-
-/**
- * Converts a especial `{exists: true}` value to the `CATALOG_FILTER_EXISTS` symbol.
- *
- * @param value - The value to convert.
- * @returns The converted value.
- */
-function convertOpsValues(
-    value: Exclude<GithubTeamPickerFilterQueryValue, Array<any>>,
-  ): string | symbol {
-    if (typeof value === 'object' && value.exists) {
-      return CATALOG_FILTER_EXISTS;
-    }
-    return value?.toString();
-  }
-
-/**
- * Converts schema filters to entity filter query, replacing `{exists:true}` values
- * with the constant `CATALOG_FILTER_EXISTS`.
- *
- * @param schemaFilters - An object containing schema filters with keys as filter names
- * and values as filter values.
- * @returns An object with the same keys as the input object, but with `{exists:true}` values
- * transformed to `CATALOG_FILTER_EXISTS` symbol.
- */
-function convertSchemaFiltersToQuery(
-    schemaFilters: GithubTeamPickerFilterQuery,
-  ): Exclude<EntityFilterQuery, Array<any>> {
-    const query: EntityFilterQuery = {};
-  
-    for (const [key, value] of Object.entries(schemaFilters)) {
-      if (Array.isArray(value)) {
-        query[key] = value;
-      } else {
-        query[key] = convertOpsValues(value);
-      }
-    }
-  
-    return query;
-  }
-  
-
-/**
- * Builds an `EntityFilterQuery` based on the `uiSchema` passed in.
- * If `catalogFilter` is specified in the `uiSchema`, it is converted to a `EntityFilterQuery`.
- * If `allowedKinds` is specified in the `uiSchema` will support the legacy `allowedKinds` option.
- *
- * @param uiSchema The `uiSchema` of an `EntityPicker` component.
- * @returns An `EntityFilterQuery` based on the `uiSchema`, or `undefined` if `catalogFilter` is not specified in the `uiSchema`.
- */
-function buildCatalogFilter(
-    uiSchema: GithubTeamPickerProps['uiSchema'],
-): EntityFilterQuery | undefined {
-    const catalogFilter: GithubTeamPickerUiOptions['catalogFilter'] | undefined =
-      uiSchema['ui:options']?.catalogFilter;
-  
-    if (!catalogFilter) {
-      return undefined;
-    }
-  
-    if (Array.isArray(catalogFilter)) {
-      return catalogFilter.map(convertSchemaFiltersToQuery);
-    }
-  
-    return convertSchemaFiltersToQuery(catalogFilter);
-}
 
 export const GithubTeamPickerExtension =  scaffolderPlugin.provide(
     createScaffolderFieldExtension({
