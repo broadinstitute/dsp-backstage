@@ -2,7 +2,7 @@ import { CATALOG_FILTER_EXISTS } from '@backstage/catalog-client';
 import { Entity } from '@backstage/catalog-model';
 import { CatalogApi, catalogApiRef } from '@backstage/plugin-catalog-react';
 import { renderInTestApp, TestApiProvider } from '@backstage/test-utils';
-import { FieldProps } from '@rjsf/core';
+import { FieldProps} from '@rjsf/core';
 import { fireEvent, screen } from '@testing-library/react';
 import React from 'react';
 import { GithubTeamPicker } from './GithubTeamPicker';
@@ -20,6 +20,7 @@ describe('<GithubTeamPicker />', () => {
     const schema = {};
     const required = false;
     let uiSchema: GithubTeamPickerProps['uiSchema'];
+    let idSchema: GithubTeamPickerProps['idSchema'] = {$id: 'test'};
     const rawErrors: string[] = [];
     const formData = undefined;
 
@@ -51,5 +52,29 @@ describe('<GithubTeamPicker />', () => {
 
     afterEach(() => jest.resetAllMocks());
 
-    
+    describe('with default options', () => {
+        beforeEach(() => {
+            uiSchema = {};
+            props = {
+                onChange,
+                schema,
+                required,
+                uiSchema,
+                rawErrors,
+                formData,
+                idSchema,
+            } as unknown as FieldProps<any>;
+            catalogApi.getEntities.mockResolvedValue({ items: entities });
+        })
+
+        it('searches for groups', async () => {
+            await renderInTestApp(
+                <Wrapper>
+                    <GithubTeamPicker {...props} />
+                </Wrapper>,
+            );
+
+            expect(catalogApi.getEntities).toHaveBeenCalledWith({filter: {kind: ['Group']}}, undefined);
+        });
+    })
 });
