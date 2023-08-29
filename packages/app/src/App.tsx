@@ -36,6 +36,9 @@ import { catalogEntityCreatePermission } from '@backstage/plugin-catalog-common/
 import { githubAuthApiRef } from '@backstage/core-plugin-api';
 import { SignInPage } from '@backstage/core-components';
 
+import { ScaffolderFieldExtensions } from '@backstage/plugin-scaffolder-react';
+import { GithubTeamPickerExtension } from './scaffolder/GithubTeamPicker/GithubTeamPicker';
+
 const app = createApp({
   apis,
   components: {
@@ -90,7 +93,11 @@ const routes = (
         <ReportIssue />
       </TechDocsAddons>
     </Route>
-    <Route path="/create" element={<ScaffolderPage />} />
+    <Route path="/create" element={<ScaffolderPage />}>
+      <ScaffolderFieldExtensions>
+        <GithubTeamPickerExtension />
+      </ScaffolderFieldExtensions>
+    </Route>
     <Route path="/api-docs" element={<ApiExplorerPage />} />
     <Route
       path="/tech-radar"
