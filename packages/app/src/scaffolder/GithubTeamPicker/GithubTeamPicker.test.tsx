@@ -20,7 +20,7 @@ describe('<GithubTeamPicker />', () => {
   const schema = {};
   const required = false;
   let uiSchema: GithubTeamPickerProps['uiSchema'];
-  let idSchema: GithubTeamPickerProps['idSchema'] = { $id: 'test' };
+  const idSchema: GithubTeamPickerProps['idSchema'] = { $id: 'test' };
   const rawErrors: string[] = [];
   const formData = undefined;
 

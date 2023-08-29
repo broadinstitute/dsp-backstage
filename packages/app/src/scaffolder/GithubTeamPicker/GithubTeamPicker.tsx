@@ -1,8 +1,4 @@
 import {
-  type EntityFilterQuery,
-  CATALOG_FILTER_EXISTS,
-} from '@backstage/catalog-client';
-import {
   Entity,
   parseEntityRef,
   stringifyEntityRef,
@@ -65,7 +61,7 @@ export const GithubTeamPicker = (props: GithubTeamPickerProps) => {
         return ref;
       }
     },
-    [defaultNamespace],
+    [],
   );
 
   const onSelect = useCallback(
