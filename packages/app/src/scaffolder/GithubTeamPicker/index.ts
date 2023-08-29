@@ -1,1 +1,4 @@
-export { GithubTeamPickerFieldSchema, type GithubTeamPickerUiOptions } from './schema'; 
+export {
+  GithubTeamPickerFieldSchema,
+  type GithubTeamPickerUiOptions,
+} from './schema';
