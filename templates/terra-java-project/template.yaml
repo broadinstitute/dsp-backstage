@@ -107,9 +107,11 @@ spec:
           - access: admin
             team: databiosphere/broad-devops
           - access: write
-            team: BroadWrite
+            team: databiosphere/BroadWrite
           - access: admin
             user: dsp-atlantis
+          - access: admin
+            user: broadbot
 
     # The final step is to register our new component in the catalog.
     - id: register

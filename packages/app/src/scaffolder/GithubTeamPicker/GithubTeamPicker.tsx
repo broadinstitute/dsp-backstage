@@ -124,7 +124,7 @@ export const GithubTeamPicker = (props: GithubTeamPickerProps) => {
             onChange={onSelect}
             options={entities || []}
             getOptionLabel={option =>
-                typeof option === 'string' ? option : humanizeEntityRef(option, { defaultKind: 'Group', defaultNamespace })
+                typeof option === 'string' ? option : option.metadata?.annotations?.['github.com/team-slug'] || ''
             }
             autoSelect
             freeSolo={allowArbitrary}
