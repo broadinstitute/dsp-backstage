@@ -44,25 +44,22 @@ export const GithubTeamPicker = (props: GithubTeamPickerProps) => {
   });
 
   const allowArbitrary = uiSchema['ui:options']?.allowArbitraryValues ?? false;
-  const getLabel = useCallback(
-    (ref: string) => {
-      try {
-        return humanizeEntityRef(
-          parseEntityRef(ref, {
-            defaultKind: 'Group',
-            defaultNamespace: 'default',
-          }),
-          {
-            defaultKind: 'Group',
-            defaultNamespace: 'default',
-          },
-        );
-      } catch (err) {
-        return ref;
-      }
-    },
-    [],
-  );
+  const getLabel = useCallback((ref: string) => {
+    try {
+      return humanizeEntityRef(
+        parseEntityRef(ref, {
+          defaultKind: 'Group',
+          defaultNamespace: 'default',
+        }),
+        {
+          defaultKind: 'Group',
+          defaultNamespace: 'default',
+        },
+      );
+    } catch (err) {
+      return ref;
+    }
+  }, []);
 
   const onSelect = useCallback(
     (_: any, ref: string | Entity | null, reason: AutocompleteChangeReason) => {
