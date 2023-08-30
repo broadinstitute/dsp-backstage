@@ -10,9 +10,13 @@ import { FieldExtensionComponentProps } from '@backstage/plugin-scaffolder-react
 const makeEntity = (kind: string, name: string, namespace: string) => ({
   apiVersion: 'scaffolder.backstage.io/v1beta3',
   kind,
-  metadata: { name, namespace, annotations: {
-    'github.com/team-slug': `my-org/${name}`
-  }},
+  metadata: {
+    name,
+    namespace,
+    annotations: {
+      'github.com/team-slug': `my-org/${name}`,
+    },
+  },
 });
 
 describe('<GithubTeamPicker />', () => {
@@ -83,20 +87,20 @@ describe('<GithubTeamPicker />', () => {
       );
     });
 
-    it('shows the team slug to users', async () =>{
-       const { getByRole } = await renderInTestApp(
+    it('shows the team slug to users', async () => {
+      const { getByRole } = await renderInTestApp(
         <Wrapper>
           <GithubTeamPicker {...props} />
           <div data-test-id="outside">Outside</div>
         </Wrapper>,
       );
-      
+
       const input = getByRole('textbox');
       // open the autocomplete dropdown
       fireEvent.click(input);
       // select the first option
       fireEvent.change(input, { target: { value: 'my-org/team-a' } });
-      
+
       expect(input).toHaveValue('my-org/team-a');
     });
 
