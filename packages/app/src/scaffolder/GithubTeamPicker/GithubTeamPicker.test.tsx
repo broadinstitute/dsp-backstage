@@ -2,6 +2,7 @@ import { Entity } from '@backstage/catalog-model';
 import { CatalogApi, catalogApiRef } from '@backstage/plugin-catalog-react';
 import { renderInTestApp, TestApiProvider } from '@backstage/test-utils';
 import { FieldProps, IdSchema } from '@rjsf/core';
+import { fireEvent, screen } from '@testing-library/react';
 import React from 'react';
 import { GithubTeamPicker } from './GithubTeamPicker';
 import { FieldExtensionComponentProps } from '@backstage/plugin-scaffolder-react';
@@ -9,7 +10,9 @@ import { FieldExtensionComponentProps } from '@backstage/plugin-scaffolder-react
 const makeEntity = (kind: string, name: string, namespace: string) => ({
   apiVersion: 'scaffolder.backstage.io/v1beta3',
   kind,
-  metadata: { name, namespace },
+  metadata: { name, namespace, annotations: {
+    'github.com/team-slug': `my-org/${name}`
+  }},
 });
 
 describe('<GithubTeamPicker />', () => {
@@ -78,6 +81,39 @@ describe('<GithubTeamPicker />', () => {
         { filter: { kind: ['Group'] } },
         undefined,
       );
+    });
+
+    it('shows the team slug to users', async () =>{
+       const { getByRole } = await renderInTestApp(
+        <Wrapper>
+          <GithubTeamPicker {...props} />
+          <div data-test-id="outside">Outside</div>
+        </Wrapper>,
+      );
+      
+      const input = getByRole('textbox');
+      // open the autocomplete dropdown
+      fireEvent.click(input);
+      // select the first option
+      fireEvent.change(input, { target: { value: 'my-org/team-a' } });
+      
+      expect(input).toHaveValue('my-org/team-a');
+    });
+
+    it('will not allow arbirtary values', async () => {
+      const { getByRole } = await renderInTestApp(
+        <Wrapper>
+          <GithubTeamPicker {...props} />
+          <div data-test-id="outside">Outside</div>
+        </Wrapper>,
+      );
+
+      const input = getByRole('textbox');
+      // try to input an invalid value
+      fireEvent.change(input, { target: { value: 'fake' } });
+      fireEvent.blur(input);
+
+      expect(input).toHaveValue('');
     });
   });
 });
