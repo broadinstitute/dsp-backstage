@@ -33,9 +33,7 @@ spec:
           title: Project Slug
           type: string
           description: A short one word name for the project used in infrastructure representations. NO HYPHENS!
-          ui:placholder: shortname
-          ui:options:
-            rows: 5
+          ui:field: ValidateSlug
         visibility:
           title: Repo Visibility
           type: string
