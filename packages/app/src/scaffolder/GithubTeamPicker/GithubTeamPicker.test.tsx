@@ -1,12 +1,10 @@
-import { CATALOG_FILTER_EXISTS } from '@backstage/catalog-client';
 import { Entity } from '@backstage/catalog-model';
 import { CatalogApi, catalogApiRef } from '@backstage/plugin-catalog-react';
 import { renderInTestApp, TestApiProvider } from '@backstage/test-utils';
-import { FieldProps } from '@rjsf/core';
-import { fireEvent, screen } from '@testing-library/react';
+import { FieldProps, IdSchema } from '@rjsf/core';
 import React from 'react';
 import { GithubTeamPicker } from './GithubTeamPicker';
-import { GithubTeamPickerProps } from './schema';
+import { FieldExtensionComponentProps } from '@backstage/plugin-scaffolder-react';
 
 const makeEntity = (kind: string, name: string, namespace: string) => ({
   apiVersion: 'scaffolder.backstage.io/v1beta3',
@@ -19,8 +17,10 @@ describe('<GithubTeamPicker />', () => {
   const onChange = jest.fn();
   const schema = {};
   const required = false;
-  let uiSchema: GithubTeamPickerProps['uiSchema'];
-  const idSchema: GithubTeamPickerProps['idSchema'] = { $id: 'test' };
+  let uiSchema: FieldExtensionComponentProps<any, any>['uiSchema'];
+  const idSchema: FieldExtensionComponentProps<any, any>['idSchema'] = {
+    $id: 'test',
+  } as IdSchema<any>;
   const rawErrors: string[] = [];
   const formData = undefined;
 

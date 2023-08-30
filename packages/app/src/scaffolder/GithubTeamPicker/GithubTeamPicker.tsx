@@ -15,13 +15,15 @@ import Autocomplete, {
 } from '@material-ui/lab/Autocomplete';
 import React, { useCallback, useEffect } from 'react';
 import useAsync from 'react-use/lib/useAsync';
-import { GithubTeamPickerProps } from './schema';
 import { scaffolderPlugin } from '@backstage/plugin-scaffolder';
-import { createScaffolderFieldExtension } from '@backstage/plugin-scaffolder-react';
+import {
+  createScaffolderFieldExtension,
+  FieldExtensionComponentProps,
+} from '@backstage/plugin-scaffolder-react';
 
-export { GithubTeamTeamPickerSchema } from './schema';
-
-export const GithubTeamPicker = (props: GithubTeamPickerProps) => {
+export const GithubTeamPicker: (
+  props: FieldExtensionComponentProps<any, any>,
+) => React.JSX.Element = (props: FieldExtensionComponentProps<any, any>) => {
   const {
     onChange,
     schema: { title = 'Github Team', description = 'Select a Github Team' },
