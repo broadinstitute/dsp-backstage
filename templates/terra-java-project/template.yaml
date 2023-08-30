@@ -66,9 +66,8 @@ spec:
         owner:
           title: Team
           type: string
-          description: Github user or team that will own the repository
-          ui:autofocus: true
-          ui:placeholder: github-team
+          description: Github team that will own the repository
+          ui:field: GithubTeamPicker
 
   # These steps are executed in the scaffolder backend, using data that we gathered
   # via the parameters above.
@@ -105,9 +104,11 @@ spec:
           - access: admin
             team: databiosphere/broad-devops
           - access: write
-            team: BroadWrite
+            team: databiosphere/BroadWrite
           - access: admin
             user: dsp-atlantis
+          - access: admin
+            user: broadbot
 
     # The final step is to register our new component in the catalog.
     - id: register
