@@ -38,6 +38,7 @@ import { SignInPage } from '@backstage/core-components';
 
 import { ScaffolderFieldExtensions } from '@backstage/plugin-scaffolder-react';
 import { GithubTeamPickerExtension } from './scaffolder/GithubTeamPicker/GithubTeamPicker';
+import { ValidateSlugExtension } from './scaffolder/ValidateSlug';
 
 const app = createApp({
   apis,
@@ -96,6 +97,7 @@ const routes = (
     <Route path="/create" element={<ScaffolderPage />}>
       <ScaffolderFieldExtensions>
         <GithubTeamPickerExtension />
+        <ValidateSlugExtension />
       </ScaffolderFieldExtensions>
     </Route>
     <Route path="/api-docs" element={<ApiExplorerPage />} />
