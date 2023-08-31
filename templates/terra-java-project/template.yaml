@@ -101,7 +101,7 @@ spec:
         collaborators:
           - access: admin
             team: databiosphere/broad-devops
-          - access: write
+          - access: push
             team: databiosphere/broadwrite
           - access: admin
             user: dsp-atlantis
