@@ -102,7 +102,7 @@ spec:
           - access: admin
             team: databiosphere/broad-devops
           - access: write
-            team: databiosphere/BroadWrite
+            team: databiosphere/broadwrite
           - access: admin
             user: dsp-atlantis
           - access: admin
