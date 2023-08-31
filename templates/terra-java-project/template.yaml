@@ -33,9 +33,7 @@ spec:
           title: Project Slug
           type: string
           description: A short one word name for the project used in infrastructure representations. NO HYPHENS!
-          ui:placholder: shortname
-          ui:options:
-            rows: 5
+          ui:field: ValidateSlug
         visibility:
           title: Repo Visibility
           type: string
@@ -66,9 +64,8 @@ spec:
         owner:
           title: Team
           type: string
-          description: Github user or team that will own the repository
-          ui:autofocus: true
-          ui:placeholder: github-team
+          description: Github team that will own the repository
+          ui:field: GithubTeamPicker
 
   # These steps are executed in the scaffolder backend, using data that we gathered
   # via the parameters above.
@@ -104,10 +101,12 @@ spec:
         collaborators:
           - access: admin
             team: databiosphere/broad-devops
-          - access: write
-            team: BroadWrite
+          - access: push
+            team: databiosphere/broadwrite
           - access: admin
             user: dsp-atlantis
+          - access: admin
+            user: broadbot
 
     # The final step is to register our new component in the catalog.
     - id: register
