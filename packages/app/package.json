@@ -54,12 +54,12 @@
     "react-router": "^6.3.0",
     "react-router-dom": "^6.3.0",
     "react-use": "^17.2.4",
+    "@rjsf/core": "^5.12.1",
     "zod": "^3.22.2"
   },
   "devDependencies": {
     "@backstage/catalog-client": "^1.4.3",
     "@backstage/test-utils": "^1.4.1",
-    "@rjsf/core": "^5.12.1",
     "@testing-library/dom": "^8.0.0",
     "@testing-library/jest-dom": "^5.10.1",
     "@testing-library/react": "^12.1.3",
