@@ -84,18 +84,6 @@ jobs:
           RELEASE_BRANCHES: ${{ github.event.repository.default_branch }}
           WITH_V: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      # Pre build commands
-      - name: Setup Node
-        uses: actions/setup-node@v2
-        with:
-          node-version: "16.x"
-      - name: Install dependencies
-        run: yarn install --frozen-lockfile
-      - name: run tsc
-        run: yarn tsc
-      - name: build backend
-        run: yarn build:backend
       # Build images
       - name: Construct docker image name and tag
         id: image-name
@@ -112,7 +100,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
-          file: packages/backend/Dockerfile
+          file: Dockerfile
           push: false
           load: true
           tags: |
