@@ -3,6 +3,8 @@ FROM node:16-bullseye-slim as packages
 
 WORKDIR /app
 
+COPY package.json yarn.lock ./
+
 COPY packages packages
 
 # COPY plugins plugins
@@ -26,11 +28,12 @@ WORKDIR /app
 
 COPY --from=packages --chown=node:node /app .
 
-COPY --chown=node:node . .
 # Don't install cypress
 ENV CYPRESS_INSTALL_BINARY=0
 RUN --mount=type=cache,target=/home/node/.cache/yarn,sharing=locked,uid=1000,gid=1000 \
     yarn install --frozen-lockfile
+
+COPY --chown=node:node . .
 
 RUN yarn tsc
 
@@ -62,7 +65,12 @@ WORKDIR /app
 # Copy the install dependencies from the build stage and context
 COPY --from=build --chown=node:node /app/yarn.lock /app/package.json /app/packages/backend/dist/skeleton/ ./
 
-RUN yarn install --frozen-lockfile --network-timeout 600000
+# Copy node modules from the build stage
+COPY --from=build --chown=node:node /app/node_modules /app/node_modules
+COPY --from=build --chown=node:node /app/packages/backend/node_modules /app/packages/backend/node_modules
+COPY --from=build --chown=node:node /app/packages/app/node_modules /app/packages/app/node_modules
+
+# RUN yarn install --frozen-lockfile --network-timeout 600000
 
 # Copy the built packages from the build stage
 COPY --from=build --chown=node:node /app/packages/backend/dist/bundle/ ./
