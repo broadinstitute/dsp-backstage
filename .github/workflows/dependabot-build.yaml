@@ -16,8 +16,6 @@ jobs:
       - name: Build image
         uses: docker/build-push-action@v3
         with:
-          context: .
-          file: Dockerfile
           push: false
           load: true
           tags: |
