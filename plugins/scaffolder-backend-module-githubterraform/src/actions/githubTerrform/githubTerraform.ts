@@ -16,7 +16,8 @@ export function createGithubTerraformAction() {
     myParameter: string;
   }>({
     id: 'dsp:githubTerraform',
-    description: 'Initializes the terraform setup for a new github repository in terraform-ap-deployments',
+    description:
+      'Initializes the terraform setup for a new github repository in terraform-ap-deployments',
     schema: {
       input: {
         type: 'object',

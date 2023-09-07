@@ -1,5 +1,8 @@
 import { CatalogClient } from '@backstage/catalog-client';
-import { createBuiltinActions, createRouter } from '@backstage/plugin-scaffolder-backend';
+import {
+  createBuiltinActions,
+  createRouter,
+} from '@backstage/plugin-scaffolder-backend';
 import { Router } from 'express';
 import { ScmIntegrations } from '@backstage/integration';
 import type { PluginEnvironment } from '../types';
@@ -17,7 +20,7 @@ export default async function createPlugin(
     catalogClient,
     config: env.config,
     reader: env.reader,
-  })
+  });
 
   const actions = [...builtinActions, createGithubTerraformAction()];
 

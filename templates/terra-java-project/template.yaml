@@ -82,7 +82,7 @@ spec:
           projectSlug: ${{ parameters.projectSlug }}
           organization: ${{ parameters.organization }}
           catalogInfoFileName: foundation
-    
+
     - id: github-terraform
       name: Github Terraform
       action: dsp:githubTerraform
