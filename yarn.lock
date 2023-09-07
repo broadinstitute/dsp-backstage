@@ -2828,7 +2828,7 @@
     yn "^4.0.0"
     yup "^0.32.9"
 
-"@backstage/plugin-scaffolder-backend@^1.16.5":
+"@backstage/plugin-scaffolder-backend@^1.16.3", "@backstage/plugin-scaffolder-backend@^1.16.5":
   version "1.16.5"
   resolved "https://registry.yarnpkg.com/@backstage/plugin-scaffolder-backend/-/plugin-scaffolder-backend-1.16.5.tgz#f69d65cf52ae750bad39bc493f90e43ebd3f226b"
   integrity sha512-rCYuJ/YjNeClNaxcFCBaiUwM4jfWWFqsbrUx6SxO8uVt8utB/ocelZtlCslWREFyiAuIWEY0w6lW7+fJzHeT+g==

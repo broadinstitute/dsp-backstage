@@ -82,45 +82,51 @@ spec:
           projectSlug: ${{ parameters.projectSlug }}
           organization: ${{ parameters.organization }}
           catalogInfoFileName: foundation
+    
+    - id: github-terraform
+      name: Github Terraform
+      action: dsp:githubTerraform
+      input:
+        myParameter: mike
 
     # This step publishes the contents of the working directory to GitHub.
-    - id: publish
-      name: Publish
-      action: publish:github
-      input:
-        allowedHosts: ['github.com']
-        description: This is ${{ parameters.name }}
-        repoUrl: 'github.com?repo=${{ parameters.name }}&owner=${{ parameters.organization }}'
-        repoVisibility: ${{ parameters.visibility }}
-        defaultBranch: main
-        access: ${{ parameters.organization }}/${{ parameters.owner }}
-        requiredApprovingReviewCount: 2
-        allowMergeCommit: false
-        allowSquashMerge: true
-        allowRebaseMerge: false
-        collaborators:
-          - access: admin
-            team: databiosphere/broad-devops
-          - access: push
-            team: databiosphere/broadwrite
-          - access: admin
-            user: dsp-atlantis
-          - access: admin
-            user: broadbot
+    # - id: publish
+    #   name: Publish
+    #   action: publish:github
+    #   input:
+    #     allowedHosts: ['github.com']
+    #     description: This is ${{ parameters.name }}
+    #     repoUrl: 'github.com?repo=${{ parameters.name }}&owner=${{ parameters.organization }}'
+    #     repoVisibility: ${{ parameters.visibility }}
+    #     defaultBranch: main
+    #     access: ${{ parameters.organization }}/${{ parameters.owner }}
+    #     requiredApprovingReviewCount: 2
+    #     allowMergeCommit: false
+    #     allowSquashMerge: true
+    #     allowRebaseMerge: false
+    #     collaborators:
+    #       - access: admin
+    #         team: databiosphere/broad-devops
+    #       - access: push
+    #         team: databiosphere/broadwrite
+    #       - access: admin
+    #         user: dsp-atlantis
+    #       - access: admin
+    #         user: broadbot
 
-    # The final step is to register our new component in the catalog.
-    - id: register
-      name: Register
-      action: catalog:register
-      input:
-        repoContentsUrl: ${{ steps['publish'].output.repoContentsUrl }}
-        catalogInfoPath: '/foundation.yaml'
+    # # The final step is to register our new component in the catalog.
+    # - id: register
+    #   name: Register
+    #   action: catalog:register
+    #   input:
+    #     repoContentsUrl: ${{ steps['publish'].output.repoContentsUrl }}
+    #     catalogInfoPath: '/foundation.yaml'
 
   # Outputs are displayed to the user after a successful execution of the template.
-  output:
-    links:
-      - title: Repository
-        url: ${{ steps['publish'].output.remoteUrl }}
-      - title: Open in catalog
-        icon: catalog
-        entityRef: ${{ steps['register'].output.entityRef }}
+  # output:
+  #   links:
+  #     - title: Repository
+  #       url: ${{ steps['publish'].output.remoteUrl }}
+  #     - title: Open in catalog
+  #       icon: catalog
+  #       entityRef: ${{ steps['register'].output.entityRef }}
