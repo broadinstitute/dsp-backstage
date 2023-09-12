@@ -146,37 +146,37 @@ spec:
         url: 'https://github.com/broadinstitute/terraform-ap-deployments-mf-scaffolder/tree/master/atlantis.yaml'
         targetPath: terraform/atlantis.yaml
 
-    - id: update-atlantis-config
-      name: Add New Repo to Atlantis Config
-      action: roadiehq:utils:jsonata:yaml:transform
-      input:
-        path: ./terraform/atlantis.yaml
-        expression: |-
-          (
-            $repoName := "${{ parameters.organization }}-${{ parameters.name }}"
-            $ ~> | $ | {
-              "projects": [
-                projects,
-                {
-                  "name": $repoName,
-                  "dir": "github",
-                  "workflow": "./tfvars/$WORKSPACE.tfvars",
-                  "workspace": $repoName,
-                  "terraform_version": "v1.1.1",
-                  "autoplane": {
-                    "enable": true
-                  }
-                }
-              ]
-            }
-          )
+    # - id: update-atlantis-config
+    #   name: Add New Repo to Atlantis Config
+    #   action: roadiehq:utils:jsonata:yaml:transform
+    #   input:
+    #     path: ./terraform/atlantis.yaml
+    #     expression: |-
+    #       (
+    #         $repoName := "${{ parameters.organization }}-${{ parameters.name }}"
+    #         $ ~> | $ | {
+    #           "projects": [
+    #             projects,
+    #             {
+    #               "name": $repoName,
+    #               "dir": "github",
+    #               "workflow": "./tfvars/$WORKSPACE.tfvars",
+    #               "workspace": $repoName,
+    #               "terraform_version": "v1.1.1",
+    #               "autoplane": {
+    #                 "enable": true
+    #               }
+    #             }
+    #           ]
+    #         }
+    #       )
     
-    - id: write-updated-atlantis-config
-      name: Write Updated Atlantis Config
-      action: roadiehq:utils:fs:write
-      input:
-        path: ./terraform/atlantis.yaml
-        content: ${{ steps['update-atlantis-config'].output.result }}
+    # - id: write-updated-atlantis-config
+    #   name: Write Updated Atlantis Config
+    #   action: roadiehq:utils:fs:write
+    #   input:
+    #     path: ./terraform/atlantis.yaml
+    #     content: ${{ steps['update-atlantis-config'].output.result }}
 
     - id: fetch-github-tfvar-template
       name: Fetch Github Terraform Template

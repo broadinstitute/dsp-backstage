@@ -37,10 +37,8 @@ catalog:
   # See https://backstage.io/docs/features/software-catalog/#adding-components-to-the-catalog for more details
   # on how to get entities into the catalog.
   locations:
-    - type: url
-      target: https://github.com/broadinstitute/dsp-backstage/blob/main/templates/terra-java-project/template.yaml
-      rules:
-        - allow: [Template]
+    - type: file
+      target: ../../templates/terra-java-project/template.yaml
 auth:
   environment: prod
   providers:
