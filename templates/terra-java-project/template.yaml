@@ -66,6 +66,7 @@ spec:
           type: string
           description: Github team that will own the repository
           ui:field: GithubTeamPicker
+          ui:autofocus: true
     - title: Tracking Info
       required:
         - slackChannel
@@ -88,7 +89,7 @@ spec:
   steps:
     # Each step executes an action, in this case one templates files into the working directory.
     - id: fetch-base
-      name: Fetch Base
+      name: Fetch Terra Java Project Template
       action: fetch:template
       input:
         url: https://github.com/DataBiosphere/terra-java-project-cookiecutter
@@ -100,83 +101,85 @@ spec:
           slackChannel: ${{ parameters.slackChannel }}
           catalogInfoFileName: foundation
 
-    # - id: github-terraform
-    #   name: Github Terraform
-    #   action: dsp:githubTerraform
-    #   input:
-    #     myParameter: mike
-
     # This step publishes the contents of the working directory to GitHub.
-    # - id: publish
-    #   name: Publish
-    #   action: publish:github
-    #   input:
-    #     allowedHosts: ['github.com']
-    #     description: This is ${{ parameters.name }}
-    #     repoUrl: 'github.com?repo=${{ parameters.name }}&owner=${{ parameters.organization }}'
-    #     repoVisibility: ${{ parameters.visibility }}
-    #     defaultBranch: main
-    #     access: ${{ parameters.organization }}/${{ parameters.owner }}
-    #     requiredApprovingReviewCount: 2
-    #     allowMergeCommit: false
-    #     allowSquashMerge: true
-    #     allowRebaseMerge: false
-    #     collaborators:
-    #       - access: admin
-    #         team: databiosphere/broad-devops
-    #       - access: push
-    #         team: databiosphere/broadwrite
-    #       - access: admin
-    #         user: dsp-atlantis
-    #       - access: admin
-    #         user: broadbot
+    - id: publish
+      name: Creating New Service Repository
+      action: publish:github
+      input:
+        allowedHosts: ['github.com']
+        description: This is ${{ parameters.name }}
+        repoUrl: 'github.com?repo=${{ parameters.name }}&owner=${{ parameters.organization }}'
+        repoVisibility: ${{ parameters.visibility }}
+        defaultBranch: main
+        access: ${{ parameters.organization }}/${{ parameters.owner }}
+        requiredApprovingReviewCount: 2
+        allowMergeCommit: false
+        allowSquashMerge: true
+        allowRebaseMerge: false
+        gitCommitMessage: |
+          [${{ parameters.jiraTicket }}] Initial setup of ${{ parameters.name }}
+        gitAuthorName: dsp-backstage
+        gitAuthorEmail: dsp-devops@broadinstitute.org
+        collaborators:
+          - access: admin
+            team: databiosphere/broad-devops
+          - access: push
+            team: databiosphere/broadwrite
+          - access: admin
+            user: dsp-atlantis
+          - access: admin
+            user: broadbot
 
-    # # The final step is to register our new component in the catalog.
-    # - id: register
-    #   name: Register
-    #   action: catalog:register
-    #   input:
-    #     repoContentsUrl: ${{ steps['publish'].output.repoContentsUrl }}
-    #     catalogInfoPath: '/foundation.yaml'
+    # The final step is to register our new component in the catalog.
+    - id: register
+      name: Register New Service in Backstage Catalog
+      action: catalog:register
+      input:
+        repoContentsUrl: ${{ steps['publish'].output.repoContentsUrl }}
+        catalogInfoPath: '/foundation.yaml'
   
     - id: fetch-atlantis-config
-      name: Fetch Terraform Repo
+      name: Fetch terraform-ap-deployments Atlantis Config
       action: fetch:plain:file
       input:
         url: 'https://github.com/broadinstitute/terraform-ap-deployments-mf-scaffolder/tree/master/atlantis.yaml'
         targetPath: terraform/atlantis.yaml
 
-    # - id: update-atlantis-config
-    #   name: Add New Repo to Atlantis Config
-    #   action: roadiehq:utils:jsonata:yaml:transform
-    #   input:
-    #     path: ./terraform/atlantis.yaml
-    #     expression: |-
-    #       (
-    #         $repoName := "${{ parameters.organization }}-${{ parameters.name }}"
-    #         $ ~> | $ | {
-    #           "projects": [
-    #             projects,
-    #             {
-    #               "name": $repoName,
-    #               "dir": "github",
-    #               "workflow": "./tfvars/$WORKSPACE.tfvars",
-    #               "workspace": $repoName,
-    #               "terraform_version": "v1.1.1",
-    #               "autoplane": {
-    #                 "enable": true
-    #               }
-    #             }
-    #           ]
-    #         }
-    #       )
+    - id: update-atlantis-config
+      name: Add New Repo to Atlantis Config
+      action: roadiehq:utils:jsonata:yaml:transform
+      input:
+        path: './terraform/atlantis.yaml'
+        # This is a jsonata expression that will be evaluated against the contents of the file at the path above.
+        # This expression will append a new project definition to the projects array in the atlantis config,
+        # while leaving existing projects untouched.
+        # https://docs.jsonata.org/overview.html
+        expression: |-
+          (
+            $repoName := "${{ parameters.organization }}-${{ parameters.name }}";
+            $ ~> | $ | {
+              "projects": [
+                projects,
+                {
+                  "name": $repoName,
+                  "dir": "github",
+                  "workflow": "./tfvars/$WORKSPACE.tfvars",
+                  "workspace": $repoName,
+                  "terraform_version": "v1.1.1",
+                  "autoplan": {
+                    "enable": true
+                  }
+                }
+              ]
+            } |
+          )
     
-    # - id: write-updated-atlantis-config
-    #   name: Write Updated Atlantis Config
-    #   action: roadiehq:utils:fs:write
-    #   input:
-    #     path: ./terraform/atlantis.yaml
-    #     content: ${{ steps['update-atlantis-config'].output.result }}
+    - id: write-updated-atlantis-config
+      name: Write Updated Atlantis Config
+      action: roadiehq:utils:fs:write
+      input:
+        path: ./terraform/atlantis.yaml
+        content: ${{ steps['update-atlantis-config'].output.result }}
 
     - id: fetch-github-tfvar-template
       name: Fetch Github Terraform Template
@@ -189,7 +192,7 @@ spec:
           organization: ${{ parameters.organization }}
     
     - id: terraform-pr
-      name: Terraform PR
+      name:  Create Terraform PR
       action: publish:github:pull-request
       input:
         repoUrl: 'github.com?repo=terraform-ap-deployments-mf-scaffolder&owner=broadinstitute'
