@@ -165,7 +165,7 @@ spec:
                   "dir": "github",
                   "workflow": "./tfvars/$WORKSPACE.tfvars",
                   "workspace": $repoName,
-                  "terraform_version": "v1.1.1",
+                  "terraform_version": "v1.5.7",
                   "autoplan": {
                     "enable": true
                   }
