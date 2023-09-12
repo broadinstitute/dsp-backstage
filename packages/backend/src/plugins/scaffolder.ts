@@ -7,6 +7,7 @@ import { Router } from 'express';
 import { ScmIntegrations } from '@backstage/integration';
 import type { PluginEnvironment } from '../types';
 import { createGithubTerraformAction } from '../../../../plugins/scaffolder-backend-module-githubterraform/src';
+import { createWriteFileAction, createYamlJSONataTransformAction } from '@roadiehq/scaffolder-backend-module-utils'
 
 export default async function createPlugin(
   env: PluginEnvironment,
@@ -22,7 +23,12 @@ export default async function createPlugin(
     reader: env.reader,
   });
 
-  const actions = [...builtinActions, createGithubTerraformAction()];
+  const actions = [
+    ...builtinActions,
+    createGithubTerraformAction(),
+    createYamlJSONataTransformAction(),
+    createWriteFileAction(),
+  ];
 
   return await createRouter({
     actions,
