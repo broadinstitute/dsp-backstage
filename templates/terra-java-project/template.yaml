@@ -137,7 +137,7 @@ spec:
       input:
         repoContentsUrl: ${{ steps['publish'].output.repoContentsUrl }}
         catalogInfoPath: '/foundation.yaml'
-  
+
     - id: fetch-atlantis-config
       name: Fetch terraform-ap-deployments Atlantis Config
       action: fetch:plain:file
@@ -173,7 +173,7 @@ spec:
               ]
             } |
           )
-    
+
     - id: write-updated-atlantis-config
       name: Write Updated Atlantis Config
       action: roadiehq:utils:fs:write
@@ -190,9 +190,9 @@ spec:
         values:
           name: ${{ parameters.name }}
           organization: ${{ parameters.organization }}
-    
+
     - id: terraform-pr
-      name:  Create Terraform PR
+      name: Create Terraform PR
       action: publish:github:pull-request
       input:
         repoUrl: 'github.com?repo=terraform-ap-deployments-mf-scaffolder&owner=broadinstitute'

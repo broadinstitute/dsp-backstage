@@ -6,7 +6,10 @@ import {
 import { Router } from 'express';
 import { ScmIntegrations } from '@backstage/integration';
 import type { PluginEnvironment } from '../types';
-import { createWriteFileAction, createYamlJSONataTransformAction } from '@roadiehq/scaffolder-backend-module-utils'
+import {
+  createWriteFileAction,
+  createYamlJSONataTransformAction,
+} from '@roadiehq/scaffolder-backend-module-utils';
 
 export default async function createPlugin(
   env: PluginEnvironment,
