@@ -24,7 +24,8 @@
     "postpack": "backstage-cli package postpack"
   },
   "dependencies": {
-    "@backstage/plugin-scaffolder-backend": "^1.16.3"
+    "@backstage/plugin-scaffolder-backend": "^1.16.3",
+    "@backstage/plugin-scaffolder-node": "^0.2.2"
   },
   "devDependencies": {
     "@backstage/backend-common": "^0.19.4",
