@@ -3,7 +3,7 @@ kind: System
 metadata:
   name: terra
   description: |
-    Terra is a cloud-native platform for biomedical researchers to access data, run analysis tools, and collaborate. 
+    Terra is a cloud-native platform for biomedical researchers to access data, run analysis tools, and collaborate.
   tags:
     - dsp
     - terra
