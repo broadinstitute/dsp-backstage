@@ -41,6 +41,10 @@ catalog:
       target: https://github.com/broadinstitute/dsp-backstage/blob/main/templates/terra-java-project/template.yaml
       rules:
         - allow: [Template]
+    - type: url
+      target: https://github.com/broadinstitute/dsp-backstage/blob/main/templates/systems/terra.yaml
+      rules:
+        - allow: [System]
 auth:
   environment: prod
   providers:
