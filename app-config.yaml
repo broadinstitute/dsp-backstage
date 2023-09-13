@@ -91,6 +91,8 @@ catalog:
   locations:
     - type: file
       target: ../../templates/terra-java-project/template.yaml
+    - type: file
+      target: ../../templates/systems/terra.yaml
   providers:
     github:
       broadinstituteProvider:
