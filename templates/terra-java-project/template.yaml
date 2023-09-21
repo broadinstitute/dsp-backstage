@@ -134,7 +134,7 @@ spec:
       name: Wait for Github Propagation
       action: debug:wait
       input:
-        seconds: 10
+        seconds: 5
 
     # The final step is to register our new component in the catalog.
     - id: register
