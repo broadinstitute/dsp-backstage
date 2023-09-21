@@ -88,128 +88,136 @@ spec:
   # via the parameters above.
   steps:
     # Each step executes an action, in this case one templates files into the working directory.
-    # - id: fetch-base
-    #   name: Fetch Terra Java Project Template
-    #   action: fetch:template
-    #   input:
-    #     url: https://github.com/DataBiosphere/terra-java-project-cookiecutter
-    #     values:
-    #       name: ${{ parameters.name }}
-    #       owner: ${{ parameters.owner }}
-    #       projectSlug: ${{ parameters.projectSlug }}
-    #       organization: ${{ parameters.organization }}
-    #       slackChannel: ${{ parameters.slackChannel }}
-    #       catalogInfoFileName: foundation
+    - id: fetch-java-project-template
+      name: Fetch Terra Java Project Template
+      action: fetch:template
+      input:
+        url: https://github.com/DataBiosphere/terra-java-project-cookiecutter
+        values:
+          name: ${{ parameters.name }}
+          owner: ${{ parameters.owner }}
+          projectSlug: ${{ parameters.projectSlug }}
+          organization: ${{ parameters.organization }}
+          slackChannel: ${{ parameters.slackChannel }}
+          catalogInfoFileName: foundation
 
-    # # This step publishes the contents of the working directory to GitHub.
-    # - id: publish
-    #   name: Creating New Service Repository
-    #   action: publish:github
-    #   input:
-    #     allowedHosts: ['github.com']
-    #     description: This is ${{ parameters.name }}
-    #     repoUrl: 'github.com?repo=${{ parameters.name }}&owner=${{ parameters.organization }}'
-    #     repoVisibility: ${{ parameters.visibility }}
-    #     defaultBranch: main
-    #     access: ${{ parameters.organization }}/${{ parameters.owner }}
-    #     requiredApprovingReviewCount: 2
-    #     allowMergeCommit: false
-    #     allowSquashMerge: true
-    #     allowRebaseMerge: false
-    #     gitCommitMessage: |
-    #       [${{ parameters.jiraTicket }}] Initial setup of ${{ parameters.name }}
-    #     gitAuthorName: dsp-backstage
-    #     gitAuthorEmail: dsp-devops@broadinstitute.org
-    #     collaborators:
-    #       - access: admin
-    #         team: databiosphere/broad-devops
-    #       - access: push
-    #         team: databiosphere/broadwrite
-    #       - access: admin
-    #         user: dsp-atlantis
-    #       - access: admin
-    #         user: broadbot
+    # This step publishes the contents of the working directory to GitHub.
+    - id: publish-new-java-repo
+      name: Creating New Service Repository
+      action: publish:github
+      input:
+        allowedHosts: ['github.com']
+        description: This is ${{ parameters.name }}
+        repoUrl: 'github.com?repo=${{ parameters.name }}&owner=${{ parameters.organization }}'
+        repoVisibility: ${{ parameters.visibility }}
+        defaultBranch: main
+        access: ${{ parameters.organization }}/${{ parameters.owner }}
+        requiredApprovingReviewCount: 2
+        allowMergeCommit: false
+        allowSquashMerge: true
+        allowRebaseMerge: false
+        gitCommitMessage: |
+          [${{ parameters.jiraTicket }}] Initial setup of ${{ parameters.name }}
+        gitAuthorName: ${{ user.entity.metadata.name }}
+        gitAuthorEmail: ${{ user.entity.spec.profile.email }}
+        collaborators:
+          - access: admin
+            team: databiosphere/broad-devops
+          - access: push
+            team: databiosphere/broadwrite
+          - access: admin
+            user: dsp-atlantis
+          - access: admin
+            user: broadbot
 
-    # # The final step is to register our new component in the catalog.
-    # - id: register
-    #   name: Register New Service in Backstage Catalog
-    #   action: catalog:register
-    #   input:
-    #     repoContentsUrl: ${{ steps['publish'].output.repoContentsUrl }}
-    #     catalogInfoPath: '/foundation.yaml'
+    - id: wait-for-github-propagation
+      name: Wait for Github Propagation
+      action: debug:wait
+      input:
+        seconds: 10
 
-    # - id: fetch-atlantis-config
-    #   name: Fetch terraform-ap-deployments Atlantis Config
-    #   action: fetch:plain:file
-    #   input:
-    #     url: 'https://github.com/broadinstitute/terraform-ap-deployments-mf-scaffolder/tree/master/atlantis.yaml'
-    #     targetPath: terraform/atlantis.yaml
+    # The final step is to register our new component in the catalog.
+    - id: register
+      name: Register New Service in Backstage Catalog
+      action: catalog:register
+      input:
+        repoContentsUrl: ${{ steps['publish-new-java-repo'].output.repoContentsUrl }}
+        catalogInfoPath: '/foundation.yaml'
 
-    # - id: update-atlantis-config
-    #   name: Add New Repo to Atlantis Config
-    #   action: roadiehq:utils:jsonata:yaml:transform
-    #   input:
-    #     path: './terraform/atlantis.yaml'
-    #     # This is a jsonata expression that will be evaluated against the contents of the file at the path above.
-    #     # This expression will append a new project definition to the projects array in the atlantis config,
-    #     # while leaving existing projects untouched.
-    #     # https://docs.jsonata.org/overview.html
-    #     expression: |-
-    #       (
-    #         $repoName := "${{ parameters.organization }}-${{ parameters.name }}";
-    #         $ ~> | $ | {
-    #           "projects": [
-    #             projects,
-    #             {
-    #               "name": $repoName,
-    #               "dir": "github",
-    #               "workflow": "./tfvars/$WORKSPACE.tfvars",
-    #               "workspace": $repoName,
-    #               "terraform_version": "v1.5.7",
-    #               "autoplan": {
-    #                 "enable": true
-    #               }
-    #             }
-    #           ]
-    #         } |
-    #       )
+    - id: fetch-atlantis-config
+      name: Fetch terraform-ap-deployments Atlantis Config
+      action: fetch:plain:file
+      input:
+        url: 'https://github.com/broadinstitute/terraform-ap-deployments/tree/master/atlantis.yaml'
+        targetPath: terraform/atlantis.yaml
 
-    # - id: write-updated-atlantis-config
-    #   name: Write Updated Atlantis Config
-    #   action: roadiehq:utils:fs:write
-    #   input:
-    #     path: ./terraform/atlantis.yaml
-    #     content: ${{ steps['update-atlantis-config'].output.result }}
+    - id: update-atlantis-config
+      name: Add New Repo to Atlantis Config
+      action: roadiehq:utils:jsonata:yaml:transform
+      input:
+        path: './terraform/atlantis.yaml'
+        # This is a jsonata expression that will be evaluated against the contents of the file at the path above.
+        # This expression will append a new project definition to the projects array in the atlantis config,
+        # while leaving existing projects untouched.
+        # https://docs.jsonata.org/overview.html
+        expression: |-
+          (
+            $repoName := "${{ parameters.organization }}-${{ parameters.name }}";
+            $ ~> | $ | {
+              "projects": [
+                projects,
+                {
+                  "name": $repoName,
+                  "dir": "github",
+                  "workflow": "./tfvars/$WORKSPACE.tfvars",
+                  "workspace": $repoName,
+                  "terraform_version": "v1.1.1,
+                  "autoplan": {
+                    "enabled": true
+                  }
+                }
+              ]
+            } |
+          )
 
-    # - id: fetch-github-tfvar-template
-    #   name: Fetch Github Terraform Template
-    #   action: fetch:template
-    #   input:
-    #     url: https://github.com/broadinstitute/terraform-ap-deployments/tree/master/cookiecutters/github
-    #     targetPath: ./terraform/github
-    #     values:
-    #       name: ${{ parameters.name }}
-    #       organization: ${{ parameters.organization }}
+    - id: write-updated-atlantis-config
+      name: Write Updated Atlantis Config
+      action: roadiehq:utils:fs:write
+      input:
+        path: ./terraform/atlantis.yaml
+        content: ${{ steps['update-atlantis-config'].output.result }}
 
-    # - id: terraform-pr
-    #   name: Create Terraform PR
-    #   action: publish:github:pull-request
-    #   input:
-    #     repoUrl: 'github.com?repo=terraform-ap-deployments-mf-scaffolder&owner=broadinstitute'
-    #     branchName: '${{ parameters.jiraTicket }}-${{ parameters.name }}-github-terraform'
-    #     title: '[${{ parameters.jiraTicket }}] ${{ parameters.name }} Github Terraform Setup'
-    #     description: |
-    #       This PR sets up the standard terraform resources for managing the github repo for a new DSP service. From this point
-    #       forward follow the same process as any other terraform PR with atlantis. see README.md for more details.
+    - id: fetch-github-tfvar-template
+      name: Fetch Github Terraform Template
+      action: fetch:template
+      input:
+        url: https://github.com/broadinstitute/terraform-ap-deployments/tree/master/cookiecutters/github
+        targetPath: ./terraform/github
+        values:
+          name: ${{ parameters.name }}
+          organization: ${{ parameters.organization }}
 
-    #       - PR generated by [DSP Backstage](https://broad.io/backstage)
-    #     sourcePath: 'terraform'
+    - id: terraform-pr
+      name: Create Terraform PR
+      action: publish:github:pull-request
+      input:
+        repoUrl: 'github.com?repo=terraform-ap-deployments&owner=broadinstitute'
+        branchName: '${{ parameters.jiraTicket }}-${{ parameters.name }}-github-terraform'
+        gitAuthorName: ${{ user.entity.metadata.name }}
+        gitAuthorEmail: ${{ user.entity.spec.profile.email }}
+        title: '[${{ parameters.jiraTicket }}] ${{ parameters.name }} Github Terraform Setup'
+        description: |
+          This PR sets up the standard terraform resources for managing the github repo for a new DSP service. From this point
+          forward follow the same process as any other terraform PR with atlantis. see README.md for more details.
+
+          - PR generated by [DSP Backstage](https://broad.io/backstage)
+        sourcePath: 'terraform'
 
     - id: fetch-helmchart-template
       name: Fetch Helm Chart PR Template
       action: fetch:template
       input:
-        url: https://github.com/broadinstitute/terra-helmfile-mf-scaffolder/tree/mf-add-cookiecutters/cookiecutters/charts
+        url: https://github.com/broadinstitute/terra-helmfile/tree/master/cookiecutters/charts
         targetPath: ./helm/charts
         values:
           name: ${{ parameters.name }}
@@ -218,7 +226,7 @@ spec:
       name: Fetch Helm Values Files PR Template
       action: fetch:template
       input:
-        url: https://github.com/broadinstitute/terra-helmfile-mf-scaffolder/tree/mf-add-cookiecutters/cookiecutters/values
+        url: https://github.com/broadinstitute/terra-helmfile/tree/master/cookiecutters/values
         targetPath: ./helm/values
         values:
           name: ${{ parameters.name }}
@@ -227,8 +235,10 @@ spec:
     - id: helm-chart-pr
       name: Create Helm Chart PR
       action: publish:github:pull-request
+      gitAuthorName: ${{ user.entity.metadata.name }}
+      gitAuthorEmail: ${{ user.entity.spec.profile.email }}
       input:
-        repoUrl: 'github.com?repo=terra-helmfile-mf-scaffolder&owner=broadinstitute'
+        repoUrl: 'github.com?repo=terra-helmfile&owner=broadinstitute'
         branchName: '${{ parameters.jiraTicket }}-${{ parameters.name }}-helm-chart'
         title: '[${{ parameters.jiraTicket }}] ${{ parameters.name }} Helm Chart Setup'
         description: |
@@ -242,7 +252,7 @@ spec:
   output:
     links:
       - title: Repository
-        url: ${{ steps['publish'].output.remoteUrl }}
+        url: ${{ steps['publish-new-java-repo'].output.remoteUrl }}
       - title: Open in catalog
         icon: catalog
         entityRef: ${{ steps['register'].output.entityRef }}
