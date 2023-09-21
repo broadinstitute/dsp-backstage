@@ -231,7 +231,7 @@ spec:
         values:
           name: ${{ parameters.name }}
           projectSlug: ${{ parameters.projectSlug }}
-    
+
     - id: helm-chart-pr
       name: Create Helm Chart PR
       action: publish:github:pull-request
