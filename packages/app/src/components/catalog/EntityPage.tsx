@@ -57,6 +57,11 @@ import {
 
 import { TechDocsAddons } from '@backstage/plugin-techdocs-react';
 import { ReportIssue } from '@backstage/plugin-techdocs-module-addons-contrib';
+import {
+  EntitySoundcheckContent,
+  EntitySoundcheckCard,
+  GroupSoundcheckContent
+} from '@spotify/backstage-plugin-soundcheck';
 
 const techdocsContent = (
   <EntityTechdocsContent>
@@ -137,6 +142,9 @@ const overviewContent = (
     <Grid item md={8} xs={12}>
       <EntityHasSubcomponentsCard variant="gridItem" />
     </Grid>
+    <Grid item md={6} xs={12}>
+      <EntitySoundcheckCard />
+    </Grid>
   </Grid>
 );
 
@@ -174,6 +182,10 @@ const serviceEntityPage = (
 
     <EntityLayout.Route path="/docs" title="Docs">
       {techdocsContent}
+    </EntityLayout.Route>
+
+    <EntityLayout.Route path="/soundcheck" title="Soundcheck">
+      <EntitySoundcheckContent />
     </EntityLayout.Route>
   </EntityLayout>
 );
@@ -304,6 +316,9 @@ const groupPage = (
           <EntityMembersListCard />
         </Grid>
       </Grid>
+    </EntityLayout.Route>
+    <EntityLayout.Route path="/soundcheck" title="Soundcheck">
+      <GroupSoundcheckContent />
     </EntityLayout.Route>
   </EntityLayout>
 );

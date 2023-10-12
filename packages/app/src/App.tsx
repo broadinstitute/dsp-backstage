@@ -39,6 +39,7 @@ import { SignInPage } from '@backstage/core-components';
 import { ScaffolderFieldExtensions } from '@backstage/plugin-scaffolder-react';
 import { GithubTeamPickerExtension } from './scaffolder/GithubTeamPicker/GithubTeamPicker';
 import { ValidateSlugExtension } from './scaffolder/ValidateSlug';
+import { SoundcheckRoutingPage } from '@spotify/backstage-plugin-soundcheck';
 
 const app = createApp({
   apis,
@@ -118,6 +119,10 @@ const routes = (
     </Route>
     <Route path="/settings" element={<UserSettingsPage />} />
     <Route path="/catalog-graph" element={<CatalogGraphPage />} />
+    <Route
+      path="/soundcheck"
+      element={<SoundcheckRoutingPage title="Soundcheck" />}
+    />
   </FlatRoutes>
 );
 

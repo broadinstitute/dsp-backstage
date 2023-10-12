@@ -21,6 +21,7 @@ export POSTGRES_USER="${POSTGRES_USER:-backstage}"
 export POSTGRES_PASSWORD="${POSTGRES_PASSWORD:-password}"
 export BACKSTAGE_AUTH_GITHUB_CLIENT_ID="$(VAULT_ADDR='https://clotho.broadinstitute.org:8200' vault read -field=clientId secret/suitable/backstage/local/github-oauth)"
 export BACKSTAGE_AUTH_GITHUB_CLIENT_SECRET="$(VAULT_ADDR='https://clotho.broadinstitute.org:8200' vault read -field=clientSecret secret/suitable/backstage/local/github-oauth)"
+export BACKSTAGE_LICENSE_KEY="$(VAULT_ADDR='https://clotho.broadinstitute.org:8200' vault read -field=key secret/suitable/backstage/common/license)"
 export BACKSTAGE_GITHUB_TOKEN="$(cat ~/.backstage-github-token)"
 export LOG_LEVEL="${LOG_LEVEL:-info}"
 
