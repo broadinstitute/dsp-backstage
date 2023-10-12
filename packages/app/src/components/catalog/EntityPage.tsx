@@ -60,7 +60,7 @@ import { ReportIssue } from '@backstage/plugin-techdocs-module-addons-contrib';
 import {
   EntitySoundcheckContent,
   EntitySoundcheckCard,
-  GroupSoundcheckContent
+  GroupSoundcheckContent,
 } from '@spotify/backstage-plugin-soundcheck';
 
 const techdocsContent = (
