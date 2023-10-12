@@ -8340,7 +8340,7 @@
   resolved "https://registry.yarnpkg.com/@types/range-parser/-/range-parser-1.2.4.tgz#cd667bcfdd025213aafb7ca5915a932590acdcdc"
   integrity sha512-EEhsLsD6UsDM1yFhAvy0Cjr6VwmpMWqFBCb9w07wVugF7w9nfajxLuVmngTIpgS6svCnm6Vaw+MZhoDCKnOfsw==
 
-"@types/react-dom@*", "@types/react-dom@<18.0.0":
+"@types/react-dom@*", "@types/react-dom@<18.0.0", "@types/react-dom@^17":
   version "17.0.21"
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-17.0.21.tgz#85d56965483ce4850f5f03f9234e54a1f47786e5"
   integrity sha512-3rQEFUNUUz2MYiRwJJj6UekcW7rFLOtmK7ajQP7qJpjNdggInl3I/xM4I3Hq1yYPdCGVMgax1gZsB7BBTtayXg==
@@ -23711,15 +23711,15 @@ zod-to-json-schema@^3.20.2, zod-to-json-schema@^3.20.4, zod-to-json-schema@^3.21
   resolved "https://registry.yarnpkg.com/zod-to-json-schema/-/zod-to-json-schema-3.21.4.tgz#de97c5b6d4a25e9d444618486cb55c0c7fb949fd"
   integrity sha512-fjUZh4nQ1s6HMccgIeE0VP4QG/YRGPmyjO9sAh890aQKPEk3nqbfUXhMFaC+Dr5KvYBm8BCyvfpZf2jY9aGSsw==
 
-zod@^3.20.0:
+zod@^3.20.0, zod@^3.21.4:
   version "3.22.4"
   resolved "https://registry.yarnpkg.com/zod/-/zod-3.22.4.tgz#f31c3a9386f61b1f228af56faa9255e845cf3fff"
   integrity sha512-iC+8Io04lddc+mVqQ9AZ7OQ2MrUKGN+oIQyq1vemgt46jwCwLfhq7/pwnBnNXXXZb8VTVLKwp9EDkx+ryxIWmg==
 
-zod@^3.21.4, zod@^3.22.2:
-  version "3.22.2"
-  resolved "https://registry.yarnpkg.com/zod/-/zod-3.22.2.tgz#3add8c682b7077c05ac6f979fea6998b573e157b"
-  integrity sha512-wvWkphh5WQsJbVk1tbx1l1Ly4yg+XecD+Mq280uBGt9wa5BKSWf4Mhp6GmrkPixhMxmabYY7RbzlwVP32pbGCg==
+zod@^3.22.2:
+  version "3.22.3"
+  resolved "https://registry.yarnpkg.com/zod/-/zod-3.22.3.tgz#2fbc96118b174290d94e8896371c95629e87a060"
+  integrity sha512-EjIevzuJRiRPbVH4mGc8nApb/lVLKVpmUhAaR5R5doKGfAnGJ6Gr3CViAVjP+4FWSxCsybeWQdcgCtbX+7oZug==
 
 zwitch@^2.0.0:
   version "2.0.4"
