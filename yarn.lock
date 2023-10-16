@@ -2745,22 +2745,7 @@
     "@backstage/config" "^1.1.0"
     "@backstage/errors" "^1.2.2"
 
-"@backstage/integration-react@^1.1.18":
-  version "1.1.18"
-  resolved "https://registry.yarnpkg.com/@backstage/integration-react/-/integration-react-1.1.18.tgz#116aaf346538d075d2aba385c690921d4424427e"
-  integrity sha512-ncKcpZxNSKohNC5V6An93sL6cFXO58C6nulPOYYm0rVWWTp1gWZYcVnYyZH9n9zGctKB3iJTpE/2RKV3U5EJlA==
-  dependencies:
-    "@backstage/config" "^1.0.8"
-    "@backstage/core-components" "^0.13.4"
-    "@backstage/core-plugin-api" "^1.5.3"
-    "@backstage/integration" "^1.6.2"
-    "@backstage/theme" "^0.4.1"
-    "@material-ui/core" "^4.12.2"
-    "@material-ui/icons" "^4.9.1"
-    "@material-ui/lab" "4.0.0-alpha.61"
-    react-use "^17.2.4"
-
-"@backstage/integration-react@^1.1.19":
+"@backstage/integration-react@^1.1.18", "@backstage/integration-react@^1.1.19":
   version "1.1.19"
   resolved "https://registry.yarnpkg.com/@backstage/integration-react/-/integration-react-1.1.19.tgz#257fbed733ab7b80939ae947283d0f9e895c6fad"
   integrity sha512-Pz7sr27BKONwvd2gjgHk1cfaThfMJUgD1QiJxTZWBnI+oWBu+UWMYbFQtkavQceTkxaZU0aPLzupfuZ4FR//vg==
@@ -3153,21 +3138,22 @@
     "@backstage/backend-plugin-api" "^0.6.2"
 
 "@backstage/plugin-github-actions@^0.6.4":
-  version "0.6.4"
-  resolved "https://registry.yarnpkg.com/@backstage/plugin-github-actions/-/plugin-github-actions-0.6.4.tgz#f0029b59f7ab61a386a1ae5dbb9b183f552f1c26"
-  integrity sha512-mWLdE0QEHPkRXYHtukZeqvclBuYkN0+ezTlpweBwvVnQCN9FzzxlB+7yXxobGTrI6WHr0bV1ddaoLWq7gRhjcg==
+  version "0.6.5"
+  resolved "https://registry.yarnpkg.com/@backstage/plugin-github-actions/-/plugin-github-actions-0.6.5.tgz#ae42bd4c0e9ad2be025d81f1e94b9d13913851cb"
+  integrity sha512-w2QsOQOH5sWRJG69YvRaUDhU3bjaAUOoai/ppSXQuXEypo496zuozsc90T3T2WCLMWVgXUWPFvj3tmGW4nGXwg==
   dependencies:
-    "@backstage/catalog-model" "^1.4.1"
-    "@backstage/core-components" "^0.13.4"
-    "@backstage/core-plugin-api" "^1.5.3"
-    "@backstage/integration" "^1.6.2"
-    "@backstage/integration-react" "^1.1.18"
-    "@backstage/plugin-catalog-react" "^1.8.3"
-    "@backstage/theme" "^0.4.1"
+    "@backstage/catalog-model" "^1.4.2"
+    "@backstage/core-components" "^0.13.5"
+    "@backstage/core-plugin-api" "^1.6.0"
+    "@backstage/integration" "^1.7.0"
+    "@backstage/integration-react" "^1.1.19"
+    "@backstage/plugin-catalog-react" "^1.8.4"
+    "@backstage/theme" "^0.4.2"
     "@material-ui/core" "^4.12.2"
     "@material-ui/icons" "^4.9.1"
     "@material-ui/lab" "4.0.0-alpha.61"
     "@octokit/rest" "^19.0.3"
+    "@types/react" "^16.13.1 || ^17.0.0"
     git-url-parse "^13.0.0"
     luxon "^3.0.0"
     react-use "^17.2.4"
@@ -8340,7 +8326,7 @@
   resolved "https://registry.yarnpkg.com/@types/range-parser/-/range-parser-1.2.4.tgz#cd667bcfdd025213aafb7ca5915a932590acdcdc"
   integrity sha512-EEhsLsD6UsDM1yFhAvy0Cjr6VwmpMWqFBCb9w07wVugF7w9nfajxLuVmngTIpgS6svCnm6Vaw+MZhoDCKnOfsw==
 
-"@types/react-dom@*", "@types/react-dom@<18.0.0":
+"@types/react-dom@*", "@types/react-dom@<18.0.0", "@types/react-dom@^17":
   version "17.0.21"
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-17.0.21.tgz#85d56965483ce4850f5f03f9234e54a1f47786e5"
   integrity sha512-3rQEFUNUUz2MYiRwJJj6UekcW7rFLOtmK7ajQP7qJpjNdggInl3I/xM4I3Hq1yYPdCGVMgax1gZsB7BBTtayXg==
@@ -16637,12 +16623,7 @@ lunr@^2.3.9:
   resolved "https://registry.yarnpkg.com/lunr/-/lunr-2.3.9.tgz#18b123142832337dd6e964df1a5a7707b25d35e1"
   integrity sha512-zTU3DaZaF3Rt9rhN3uBMGQD3dD2/vFQqnvZCDv4dl5iOzq2IZQqTxu90r4E5J+nP70J3ilqVCrbho2eWaeW8Ow==
 
-luxon@^3.0.0, luxon@^3.2.1:
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/luxon/-/luxon-3.3.0.tgz#d73ab5b5d2b49a461c47cedbc7e73309b4805b48"
-  integrity sha512-An0UCfG/rSiqtAIiBPO0Y9/zAnHUZxAMiCpTd5h2smgsj7GGmcenvrvww2cqNA8/4A5ZrD1gJpHN2mIHZQF+Mg==
-
-luxon@^3.1.1:
+luxon@^3.0.0, luxon@^3.1.1, luxon@^3.2.1:
   version "3.4.3"
   resolved "https://registry.yarnpkg.com/luxon/-/luxon-3.4.3.tgz#8ddf0358a9492267ffec6a13675fbaab5551315d"
   integrity sha512-tFWBiv3h7z+T/tDaoxA8rqTxy1CHV6gHS//QdaH4pulbq/JuBSGgQspQQqcgnwdAx6pNI7cmvz5Sv/addzHmUg==
