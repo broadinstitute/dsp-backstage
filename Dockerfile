@@ -1,5 +1,5 @@
 # Stage 1 - Create yarn install skeleton
-FROM node:16-bullseye-slim as packages
+FROM node:18-bookworm-slim as packages
 
 WORKDIR /app
 
@@ -13,7 +13,7 @@ RUN find packages \! -name "package.json" -mindepth 2 -maxdepth 2 -exec rm -rf {
 
 # Stage 2 - Install dependencies and build packages
 
-FROM node:16-bullseye-slim as build
+FROM node:18-bookworm-slim as build
 
 # Install isolate vm dependencies needed by the scaffolder backend
 
@@ -45,7 +45,7 @@ RUN mkdir packages/backend/dist/skeleton packages/backend/dist/bundle \
 
 # Stage 3 - Build the actual backend and install prod depedencies
 
-FROM node:16-bullseye-slim
+FROM node:18-bookworm-slim
 
 # Install isolate-vm dependencies, these are needed by the @backstage/plugin-scaffolder-backend.
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
@@ -77,6 +77,7 @@ COPY --from=build --chown=node:node /app/packages/backend/dist/bundle/ ./
 
 # Copy any other files that we need at runtime
 COPY --chown=node:node app-config*.yaml ./
+COPY --chown=node:node soundcheck-programs.yaml ./
 
 # This switches many Node.js dependencies to production mode.
 ENV NODE_ENV production

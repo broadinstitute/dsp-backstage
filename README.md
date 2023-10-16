@@ -1,3 +1,5 @@
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=broadinstitute_dsp-backstage&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=broadinstitute_dsp-backstage)
+
 # DSP Backstage
 
 DSP Backstage provides a suite of internal developer and platform tooling to improve the experience

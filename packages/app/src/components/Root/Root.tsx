@@ -7,6 +7,7 @@ import LibraryBooks from '@material-ui/icons/LibraryBooks';
 import CreateComponentIcon from '@material-ui/icons/AddCircleOutline';
 import LogoFull from './LogoFull';
 import LogoIcon from './LogoIcon';
+import DoneAllIcon from '@material-ui/icons/DoneAll';
 import {
   Settings as SidebarSettings,
   UserSettingsSignInAvatar,
@@ -73,6 +74,7 @@ export const Root = ({ children }: PropsWithChildren<{}>) => (
         <SidebarDivider />
         <SidebarScrollWrapper>
           <SidebarItem icon={MapIcon} to="tech-radar" text="Tech Radar" />
+          <SidebarItem icon={DoneAllIcon} to="soundcheck" text="Soundcheck" />
         </SidebarScrollWrapper>
       </SidebarGroup>
       <SidebarSpace />

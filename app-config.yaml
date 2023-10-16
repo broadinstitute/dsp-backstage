@@ -75,6 +75,13 @@ auth:
         clientId: ${BACKSTAGE_AUTH_GITHUB_CLIENT_ID}
         clientSecret: ${BACKSTAGE_AUTH_GITHUB_CLIENT_SECRET}
 
+spotify:
+  licenseKey: ${BACKSTAGE_LICENSE_KEY}
+
+soundcheck:
+  programs:
+    $include: ./soundcheck-programs.yaml
+
 scaffolder:
   # see https://backstage.io/docs/features/software-templates/configuration for software template options
   defaultAuthor:
