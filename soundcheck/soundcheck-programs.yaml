@@ -1,0 +1,41 @@
+---
+- id: mike-experiment
+  name: Mike Experiment
+  ownerEntityRef: group:default/example-owner
+  description: >
+    Improve quality and reliability of your software component
+    by measuring the use of testing best practices.
+  documentationURL: https://www.backstage.io
+  levels:
+    - ordinal: 1
+      checks:
+        - id: has_less_than_ten_open_issues
+          name: Less than 10 open issues
+          description: >
+            The service should have less than 10 open issues.
+        - id: is_repo_public
+          name: The repository is public
+          description: >
+            The repository should be public.
+        - id: default_branch_is_main
+          name: Default branch is main
+          description: >
+            The default branch should be main.
+    - ordinal: 2
+      checks:
+        - id : has_readme_check
+          name: Has README
+          description: >
+            The service should have a README file.
+        - id: has_foundation_file_check
+          name: Has foundation.yaml
+          description: >
+            The service should have a foundation.yaml file.
+        - id: java_service_runs_test_on_prs
+          name: Java Service Runs tests on PRs
+          description: >
+            The service should run tests on PRs.
+          filter:
+            catalog:
+              metadata.tags: java
+          

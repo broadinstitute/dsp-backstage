@@ -1,0 +1,49 @@
+---
+- id: has_less_than_ten_open_issues
+  rule:
+    factRef: github:default/repo_details
+    path: $.open_issues
+    operator: lessThan
+    value: 10
+  passedMessage: |
+    Less than 10 open issues
+  failedMessage: |
+    Ten or more open issue(s)
+- id: is_repo_public
+  rule:
+    factRef: github:default/repo_details
+    path: $.private
+    operator: equal
+    value: false
+  passedMessage: |
+    Repo is private
+  failedMessage: |
+    Repo is not private, change repo to private
+- id: default_branch_is_main
+  rule:
+    factRef: github:default/repo_details
+    path: $.default_branch
+    operator: equal
+    value: main
+  passedMessage: |
+    Default branch is main
+  failedMessage: |
+    Change default branch to main
+- id: has_readme_check # The name of the check
+  rule: # How to evaluate this check
+    factRef: scm:default/readme_and_foundation_files_exist_fact # The fact data to reference
+    path: $.readme_exists # The path to the field to analyze
+    operator: equal # Indicates the operation to apply
+    value: true # The desired value of the field indicated in the path, above.
+- id: has_foundation_file_check
+  rule:
+    factRef: scm:default/readme_and_foundation_files_exist_fact
+    path: $.foundation_exists
+    operator: equal
+    value: true
+- id: java_service_runs_test_on_prs
+  rule:
+    factRef: scm:default/java_service_runs_tests_on_prs_fact
+    path: $.matches
+    operator: equal
+    value: true

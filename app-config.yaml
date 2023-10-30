@@ -80,7 +80,14 @@ spotify:
 
 soundcheck:
   programs:
-    $include: ./soundcheck-programs.yaml
+    $include: ./soundcheck/soundcheck-programs.yaml
+  checks:
+    $include: ./soundcheck/soundcheck-checks.yaml
+  collectors:
+    github:
+      $include: ./soundcheck/github-facts-collectors.yaml
+    scm:
+      $include: ./soundcheck/scm-facts-collectors.yaml
 
 scaffolder:
   # see https://backstage.io/docs/features/software-templates/configuration for software template options
