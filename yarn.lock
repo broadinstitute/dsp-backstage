@@ -2876,16 +2876,7 @@
     typescript-json-schema "^0.61.0"
     yaml "^2.0.0"
 
-"@backstage/config@^1.0.8", "@backstage/config@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@backstage/config/-/config-1.1.0.tgz#44eb90dbbc246f0c503260292dad63323325a581"
-  integrity sha512-E29BWXTKWBJ+o8MSHTTcOzCbgwoBDy2h3XZXrzexq2wz0Z5UVMYm3ukLesOL2C+U+Zpuz+ncdg63MWhNFHZqsA==
-  dependencies:
-    "@backstage/errors" "^1.2.2"
-    "@backstage/types" "^1.1.1"
-    lodash "^4.17.21"
-
-"@backstage/config@^1.1.1":
+"@backstage/config@^1.0.8", "@backstage/config@^1.1.0", "@backstage/config@^1.1.1":
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@backstage/config/-/config-1.1.1.tgz#824ef3d74b391579060d5646fa1f45fcd553ce02"
   integrity sha512-H+xZbIVvstrkVnfxZFH6JB3Gb5qUIb8DjHOakHUlDX7xEIXjQnaM3Kf85RtnHu0uYpFIpB29i8FI68Y/uLeqyw==
@@ -2960,18 +2951,16 @@
     zod "^3.21.4"
 
 "@backstage/core-plugin-api@^1.5.3", "@backstage/core-plugin-api@^1.6.0":
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/@backstage/core-plugin-api/-/core-plugin-api-1.6.0.tgz#15c30f01c79e82756e5c286675f8801195538afb"
-  integrity sha512-B3X9vJ8IRMY4+FCnWAgeYJhtcQJmoLvn6JzqilODtM70UfT2sBQ3UBMP/J4SPUMA15kbzi6D1x1BhHhkWd+A/w==
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/@backstage/core-plugin-api/-/core-plugin-api-1.7.0.tgz#652ec473aa22d8dede35c90159284c522667ffb5"
+  integrity sha512-nbwcC1BoS0y4mcVzGXtv6/JWkMT/6hvA91zHHGYkQ8bc0Gs6bHz/0AoSBTP8Rou+Dxf12ZYftuGCMbeQLz5s3Q==
   dependencies:
-    "@backstage/config" "^1.1.0"
+    "@backstage/config" "^1.1.1"
     "@backstage/types" "^1.1.1"
-    "@backstage/version-bridge" "^1.0.5"
+    "@backstage/version-bridge" "^1.0.6"
     "@types/react" "^16.13.1 || ^17.0.0"
     history "^5.0.0"
     i18next "^22.4.15"
-    prop-types "^15.7.2"
-    zen-observable "^0.10.0"
 
 "@backstage/errors@^1.2.1", "@backstage/errors@^1.2.2":
   version "1.2.2"
@@ -4201,27 +4190,15 @@
     "@emotion/styled" "^11.10.5"
     "@mui/material" "^5.12.2"
 
-"@backstage/types@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@backstage/types/-/types-1.1.0.tgz#cf33e0c20584e329308acca2e5fa0435f04d4ea5"
-  integrity sha512-lpzZD52WHCg+i7anibmIwC3045KVOAUJ8Reoeh74+14SAQ8DTT9aUAxmH8mOFnWzDSr7XnbY5ms8Y8qWRzn2VA==
-
-"@backstage/types@^1.1.1":
+"@backstage/types@^1.1.0", "@backstage/types@^1.1.1":
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@backstage/types/-/types-1.1.1.tgz#c9ccb30357005e7fb5fa2ac140198059976eb076"
   integrity sha512-1cUGu+FwiJZCBOuecd0BOhIRkQYllb+7no9hHhxpAsx/DvsPGMVQMGOMvtdTycdT9SQ5MuSyFwI9wpXp2DwVvQ==
 
-"@backstage/version-bridge@^1.0.4":
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/@backstage/version-bridge/-/version-bridge-1.0.4.tgz#04623e5a57a6df9f84237f62b999d2503f874150"
-  integrity sha512-rIsZpdqGzlhgqj/7tXk6qxsCzOoLBpNYYB3d5zkodNFbjVnQlz8qLYir68Q9z7mznhScr8wNaCCZSlGvxznN5g==
-  dependencies:
-    "@types/react" "^16.13.1 || ^17.0.0"
-
-"@backstage/version-bridge@^1.0.5":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@backstage/version-bridge/-/version-bridge-1.0.5.tgz#0e63b41c01b736a903c96663a339e120ee6dcdbc"
-  integrity sha512-vu4LphP1l1mP1eMqRr31QhQwS7wkXJqnD3MXI1CqoE4Hl9Ru+6v1znqZNP9F8M7QUDpe6iJH1+gGBS/OyNrOPQ==
+"@backstage/version-bridge@^1.0.4", "@backstage/version-bridge@^1.0.5", "@backstage/version-bridge@^1.0.6":
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/@backstage/version-bridge/-/version-bridge-1.0.6.tgz#87ec80d930421f44c0554e226fc2d9282c2f5358"
+  integrity sha512-30bYWdbggedNMZ08JPIu/CXhmzSxORA2qcgyd1vbbndjYpWEmOJr4G7THO2EAM8eYk90eENVvL49i7dkGvFnJg==
   dependencies:
     "@types/react" "^16.13.1 || ^17.0.0"
 
@@ -8759,10 +8736,10 @@
   resolved "https://registry.yarnpkg.com/@types/range-parser/-/range-parser-1.2.4.tgz#cd667bcfdd025213aafb7ca5915a932590acdcdc"
   integrity sha512-EEhsLsD6UsDM1yFhAvy0Cjr6VwmpMWqFBCb9w07wVugF7w9nfajxLuVmngTIpgS6svCnm6Vaw+MZhoDCKnOfsw==
 
-"@types/react-dom@*", "@types/react-dom@<18.0.0":
-  version "17.0.21"
-  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-17.0.21.tgz#85d56965483ce4850f5f03f9234e54a1f47786e5"
-  integrity sha512-3rQEFUNUUz2MYiRwJJj6UekcW7rFLOtmK7ajQP7qJpjNdggInl3I/xM4I3Hq1yYPdCGVMgax1gZsB7BBTtayXg==
+"@types/react-dom@*", "@types/react-dom@<18.0.0", "@types/react-dom@^17":
+  version "17.0.22"
+  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-17.0.22.tgz#34317e08be27b33fa9e7cdb56125b22538261bad"
+  integrity sha512-wHt4gkdSMb4jPp1vc30MLJxoWGsZs88URfmt3FRXoOEYrrqK3I8IuZLE/uFBb4UT6MRfI0wXFu4DS7LS0kUC7Q==
   dependencies:
     "@types/react" "^17"
 
