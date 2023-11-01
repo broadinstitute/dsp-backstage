@@ -77,7 +77,7 @@ COPY --from=build --chown=node:node /app/packages/backend/dist/bundle/ ./
 
 # Copy any other files that we need at runtime
 COPY --chown=node:node app-config*.yaml ./
-COPY --chown=node:node soundcheck-programs.yaml ./
+COPY --chown=node:node soundcheck ./soundcheck
 
 # This switches many Node.js dependencies to production mode.
 ENV NODE_ENV production
