@@ -1,4 +1,4 @@
-import { createTemplateAction } from '@backstage/plugin-scaffolder-node';
+import { createTemplateAction, TemplateAction } from '@backstage/plugin-scaffolder-node';
 
 /**
  * Creates a `dsp:githubTerraform` Scaffolder action.
@@ -9,7 +9,7 @@ import { createTemplateAction } from '@backstage/plugin-scaffolder-node';
  *
  * @public
  */
-export function createGithubTerraformAction() {
+export function createGithubTerraformAction(): TemplateAction<{myParameter: string}> {
   // For more information on how to define custom actions, see
   //   https://backstage.io/docs/features/software-templates/writing-custom-actions
   return createTemplateAction<{
