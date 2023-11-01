@@ -1,13 +1,16 @@
 ---
-- id: mike-experiment
-  name: Mike Experiment
-  ownerEntityRef: group:default/example-owner
+- id: experimenting
+  name: Example Track
+  ownerEntityRef: group:default/dsp-devops
   description: >
     Improve quality and reliability of your software component
     by measuring the use of testing best practices.
-  documentationURL: https://www.backstage.io
+  documentationURL: https://docs.google.com/document/d/1deV-i3_oMGBwUreDUKEhovdLawBdf0feshcP1h11wR0/edit#heading=h.sogi2y5vnhy
   levels:
     - ordinal: 1
+      name: Repo Setup
+      description: >
+        Basic checks to ensure the repository is set up correctly.
       checks:
         - id: has_less_than_ten_open_issues
           name: Less than 10 open issues
@@ -22,6 +25,9 @@
           description: >
             The default branch should be main.
     - ordinal: 2
+      name: Basics
+      description: >
+        Basic checks to test some different functionality.
       checks:
         - id : has_readme_check
           name: Has README
@@ -38,4 +44,313 @@
           filter:
             catalog:
               metadata.tags: java
-          
+
+- id: terra-production-readiness
+  name: Terra Production Readiness
+  ownerEntityRef: group:default/dsp-devops
+  description: >
+    Improve quality and reliability of your software component
+    by measuring the use of testing best practices.
+  documentationURL: https://docs.google.com/document/d/1deV-i3_oMGBwUreDUKEhovdLawBdf0feshcP1h11wR0/edit#heading=h.sogi2y5vnhy
+  levels:
+    - ordinal: 1
+      name: Architecture and Development
+      description: >
+        Checks ensuring that Basic Architecture and Development practices are followed, and required docs exist
+      checks:
+        - id: has_team_ownership_defined
+          name: Component has clearly defined team ownership
+          description: >
+            Update the [team ownership spreadsheet](https://docs.google.com/spreadsheets/d/1atjjXUKRtyWRZcMJT5J067HqSxE41SnIfW3QNTHuIl4/edit#gid=826798312)
+            Component has clearly-defined team ownership and communication:
+            Email groups / Slack channels
+            Bug prioritization standard & triage process
+            Team lead / escalation contact
+            GitHub links / code repositories
+
+            (Not sure how to collect this programmatically, so for now this is a manual check)
+        - id: has_service_documentation
+          name: Component has Design Documentation and Diagrams
+          description: >
+            Service design docs should clearly document:
+            1. Service-level architecture and design (text and diagrams that describe the app-level architecture, workflow, data flow, and user flow)
+            2. System-level architecture and design (service’s infrastructure elements and how it fits within the larger Terra system including interactions with other Terra services, handoffs of data, user tokens, authentication, etc. between services)
+
+            (Not sure how to collect this programmatically, so for now this is a manual check)
+        - id: added_to_terra_architecture_diagram
+          name: Component is added to Terra Architecture Diagram
+          description: >
+            Component must be incorporated into the terra architecture diagram
+            https://lucid.app/lucidchart/85180bd4-0f68-4435-8d57-4115c2003baa/edit?referringApp=slack&invitationId=inv_642d6f7d-b560-41ed-a9b7-24c2ed4144c9&page=Hur5FVLJONJ8#
+            (Not sure how to collect this programmatically, so for now this is a manual check)
+        - id: follows_semantic_versioning
+          name: Component follows Semantic Versioning
+          description: >
+            Component follows Semantic Versioning
+            https://semver.org/
+            This will be satisfied automatically if the component was provisioned from the Terra Java Service Template
+        - id: is_containerized
+          name: Component is Containerized
+          description: >
+            Component is Containerized
+            This will be satisfied automatically if the component was provisioned from the Terra Java Service Template
+            Can be accomplished by adding a Dockerfile to the root of the repo or having a jib step as part of the gradle build
+            Base image must be from the approved list at us.gcr.io/broad-dsp-gcr-public/base
+        - id: prs_require_2_reviews
+          name: PRs To Component Repo Require 2 Reviews
+          description: >
+            PRs To Component Repo Require 2 Reviews
+            This will be satisfied automatically if the component was provisioned from the Terra Java Service Template
+        - id: all_changes_require_jira_ticket
+          name: All Changes Require a Jira Ticket
+          description: >
+            All PR Changes to Production code Require a Jira Ticket
+            (Not sure how to collect this programmatically, so for now this is a manual check)
+        - id: follows_secret_management_practices
+          name: Follow Reccomended Secret Management Practices
+          description: >
+            This is inherited from dsp-devops's tooling and practices and should be passing by default
+        - id: has_received_app_sec_technical_review
+          name: Component has received AppSec Technical Review
+          description: >
+            Component has received AppSec Technical Review
+            Complete the AppSec New Service Questionnaire.
+            https://sdarq.dsp-appsec.broadinstitute.org/
+
+            (Not sure how to collect this programmatically, so for now this is a manual check - follow up with appsec)
+            
+    - ordinal: 2
+      name: Testing
+      description: >
+        Component meets testing requirements for Terra services
+      checks:
+        - id : has_unit_tests
+          name: Component has Unit Tests
+          description: >
+            Unit tests implemented for core functionality and, in general, demonstrated culture of thorough testing.
+            For Java services this is satisfied by scanning github actions files for ./gradlew ... test invocations,
+            could check code base for test files as well
+
+        - id: has_contract_tests
+          name: Component has Contract Tests
+          description: >
+            Guide: https://broadworkbench.atlassian.net/wiki/spaces/IRT/pages/2660368406/Getting+Started+with+Pact+Contract+Testing
+            Services should be able to publish contracts to the pact broker.
+
+            Services should ensure that its contracts with dependencies (if they exist) are published
+            (either manually or automatically) whenever there is a change to the way that the service interacts with the dependency.
+
+            Services should add "check the verification results" to the service's pre-deployment checklist/process
+            either triggered manually or automatically integrated by CI pipelines
+
+            (check for pact broker integration in github actions files)
+        - id: has_smoke_tests
+          name: Component has Smoke Tests
+          description: >
+            Pick at least top three critical endpoints that confirm basic functionality of your service.
+
+            Services should be able to run these tests programmatically on deployment to any environment.
+
+            Sample Example from Sam: 
+            https://broadworkbench.atlassian.net/wiki/spaces/DSPBLOG/blog/2022/11/14/2609381390/Building+and+Testing+Sam+in+Github+Actions+and+BEEs+Ivan+Chang+and+Justin+Yang
+        - id: has_e2e_tests
+          name: Component has End to End Tests
+          description: >
+            End-to-end tests are run in pre-production environments, covering key user journeys supported by this component.
+
+            (Not sure how to collect this programmatically, so for now this is a manual check, do any of our services actually have this right now?)
+        - id: has_static_code_analysis
+          name: Component has Static Code Analysis
+          description: >
+            Sonar and Source Clear scans run on all PRs
+
+            Checks for invocations of sonar and source clear in github actions files
+        - id: has_undergone_pen_testing
+          name: Component has undergone AppSec Pen Testing
+          description: >
+            Component has undergone AppSec Pen Testing
+
+            Engage AppSec/Red Team to perform penetration testing, which should be performed 
+            once the service has been developed but before it is pushed to Production and regularly thereafter. 
+            This should be considered non-gating so long as it happens near release and is on the AppSec Schedule.
+
+            Schedule your testing here: https://sdarq.dsp-appsec.broadinstitute.org/
+            reach out to #dsp-infosec-champions for questions
+            
+            (Would require manual attestation from appsec)
+        - id: has_undergone_zap_scans
+          name: Component has Undergone AppSec ZAP Scans
+          description: >
+            Application-level vulnerability scanning (Zap) has been performed against the service application layer. 
+            Engage AppSec to get this set up. This should just take an hour or two.
+
+            Schedule your testing here: https://sdarq.dsp-appsec.broadinstitute.org/
+            reach out to #dsp-infosec-champions for question
+            
+            (Would require manual attestation from appsec)
+        - id: has_container_vulnerability_scanning
+          name: Component has Container Vulnerability Scanning
+          description: >
+            All containerized services must user Trivy to perform container vulnerability scanning. 
+            Trivy is set up as a GitHub Action and runs against each PR. 
+            
+            This will be setup automatically for all services provisioned from the Terra Java Service Template
+    - ordinal: 3
+      name: Monitoring
+      description: >
+        Component meets monitoring requirements for Terra services
+      checks:
+        - id: has_health_check
+          name: Component has Health Check
+          description: >
+            Component has a health check endpoint that returns 200 OK when the service is healthy and 500 when it is not.
+            This will be setup automatically for all services provisioned from the Terra Java Service Template
+        - id: has_proper_logging
+          name: Component has Follows Logging Best Practices
+          description: >
+            All logs are emitted to stdout in valid JSON format
+        - id: has_custom_metrics
+          name: Component has Custom Metrics
+          description: >
+            Define at least 2 service specific metrics with help from the product team that allow visibility into service functionality
+            And instrument the service to emit these metrics via OpenTelemetry
+
+            The Terra Java Service Template include built in examples.
+        - id: has_tracing
+          name: Component has Tracing
+          description: >
+            Component is instrumented to export trace spans via OpenTelemetry
+
+            The Terra Java Service Template should have this setup by default
+        - id: has_dashboard
+          name: Component has Grafana Dashboard
+          description: >
+            The software component should have a dashboard in the dsp-grafana instance that shows relevant data for the health and function of the service.
+
+            https://grafana.dsp-devops.broadinstitute.org/d/uTAOba0nk/data-science-platform?orgId=1
+        - id: has_alerts
+          name: Component has Alerts
+          description: >
+            Define high priority service alerts and implement them with DevOps alerting infrastructure.
+
+            Alerting Guides: https://app.gitbook.com/o/-LVj1clrBdFW94pG2z2w/s/-M1f_HVXo41b0qPSpsGF/stackdriver/alerting
+
+            For most current services this is a pagerduty alert that fires when the status endpoint is failing
+        - id: has_error_reporting
+          name: Component has Error Reporting to Sentry.io
+          description: >
+            Component has Error Reporting to Sentry.io
+
+            Error reports and stack traces are collected and reported through sentry.io. 
+            The reporting tools are already setup but the new service must be configured to use them.
+    - ordinal: 4
+      name: Operations
+      description: >
+        Component meets operational requirements for Terra services
+      checks:
+        - id: has_playbook
+          name: Component has an Incident Response Playbook
+          description: >
+            Should have a team-owned service specific playbook covering the following:
+
+            A team-owned playbook containing:
+              Brief description of service
+              Basic steps to monitor health of service
+              Basic steps to diagnose failures
+              Basic steps to remediate failures (restart)
+              Basic steps to run a smoke test
+              Team contacts in case of emergency
+            
+            General Terra Playbook:
+            https://docs.google.com/document/d/1KUdZBrnedzCCYQTNNmUCn_NVgTvfVKby_dyU7Laq5g0/edit
+        - id: has_continuous_deliver_and_release
+          name: Component has Continuous Delivery and Release
+          description: >
+            Intergrate with DSP DevOps' maintained CI/CD workflows. 
+
+            If this component was provisioned using the java service template this will be
+            satisfied automatically
+        - id: has_database_backups
+          name: Component has Database Backups
+          description: >
+            Database backups are configured and tested
+
+            Nightly incremental backups and weekly full backups with minimum 3 weeks of retention is
+            required for all production databases.
+
+            (Not sure how to collect this programmatically yet, either terraform code introspection or GCP/Azure api calls)
+    - ordinal: 5
+      name: SecComp
+      description: >
+        Component meets Security and Compliance requirements for Terra services
+      checks:
+        - id: has_threat_model
+          name: Component has Threat Model
+          description: >
+            A threat model has been developed for the service and has been reviewed by product team and AppSec.
+            AppSec will most likely develop the threat model as part of the New Services Checklist review and 
+            in collaboration with the product team.
+
+            (Would require manual attestation)
+        - id: has_undergone_compliance_review
+          name: Component has undergone Compliance Review
+          description: >
+            Provide design documents and architecture diagram to Compliance Team (Sarah T and Lila L) for their review.
+            New services that are deemed to impact the existing Terra security boundary may be subject to additional documentation and testing requirements.
+            
+            (Manual Attestation)
+        - id: has_session_logout_and_timeout
+          name: Component has Session Logout and Timeout
+          description: >
+            User interfaces have a logout button that performs a hard logout whereby users 
+            are required to re-enter their credentials in order to regain access to the system. 
+            
+            This is facilitated with Terra UI code.
+
+            (This will not be applicable to all services, and might be hard to check for programmatically)
+        - id: databases_are_not_public
+          name: Component should connect to Databases via Secure Methods
+          description: >
+            For services on GCP, this should be satisfied by using the cloudsql proxy.
+            For Azure services all database connections must be private.
+            
+            Database connections should use SSL and be password protected.
+            
+            All of this should be inherited from DevOps' tooling and practices.
+        - id: supports_auth_domains_or_sensitive_data_flagging
+          name: Component supports Auth Domains or Sensitive Data Flagging
+          description: >
+            Authorization Domain functionality is supported through the new service. 
+            If Authorization Domains are not a feasible or desirable solution for the new service, 
+            the new service must provide an alternative method of flagging sensitive data that allows us to apply controls to that data.
+
+            (I, Mike F don't fully understand this requirement or how to check for it, needs additional followup)
+    - ordinal: 6
+      name: Privacy
+      description: >
+        Component meets Privacy requirements for Terra services
+      checks:
+        - id: limits_and_documents_pii_collection
+          name: Component collects minimal PII necessary and documents where it is stored
+          description: >
+            Only collect the minimum-necessary PII from users. Document where such PII is stored.
+
+            (manual attestation)
+        - id: can_delete_pii
+          name: Component can delete PII
+          description: >
+            Have a documented process for deleting PII if/when required.
+
+            (manual attestation)
+        - id: allow_users_to_view_and_modify_pii
+          name: Component allows users to view and modify their PII
+          description: >
+            Allow users to view all PII about them that is stored by the system.
+             Allow users to edit/modify such PII at will or by request.
+
+            (manual attestation)
+
+
+
+        
+            

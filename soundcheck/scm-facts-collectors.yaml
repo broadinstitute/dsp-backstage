@@ -23,7 +23,8 @@ collects: # An array of fact extractor configuration describing how to collect S
       java_service_runs_tests_on_prs_fact
     type: regex
     path: /.github/workflows/build-and-test.yml
-    regex: 
-      '.*gradlew.*test.*'
+    regex:
+      # matches the pattern run: ./gradlew <ARGS> test in a github actions workflow
+      '\s*run:\s*\.\/gradlew.*test'
       
 
