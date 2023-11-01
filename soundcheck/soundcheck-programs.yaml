@@ -29,7 +29,7 @@
       description: >
         Basic checks to test some different functionality.
       checks:
-        - id : has_readme_check
+        - id: has_readme_check
           name: Has README
           description: >
             The service should have a README file.
@@ -118,13 +118,13 @@
             https://sdarq.dsp-appsec.broadinstitute.org/
 
             (Not sure how to collect this programmatically, so for now this is a manual check - follow up with appsec)
-            
+
     - ordinal: 2
       name: Testing
       description: >
         Component meets testing requirements for Terra services
       checks:
-        - id : has_unit_tests
+        - id: has_unit_tests
           name: Component has Unit Tests
           description: >
             Unit tests implemented for core functionality and, in general, demonstrated culture of thorough testing.
@@ -176,7 +176,7 @@
 
             Schedule your testing here: https://sdarq.dsp-appsec.broadinstitute.org/
             reach out to #dsp-infosec-champions for questions
-            
+
             (Would require manual attestation from appsec)
         - id: has_undergone_zap_scans
           name: Component has Undergone AppSec ZAP Scans
@@ -186,14 +186,14 @@
 
             Schedule your testing here: https://sdarq.dsp-appsec.broadinstitute.org/
             reach out to #dsp-infosec-champions for question
-            
+
             (Would require manual attestation from appsec)
         - id: has_container_vulnerability_scanning
           name: Component has Container Vulnerability Scanning
           description: >
             All containerized services must user Trivy to perform container vulnerability scanning. 
             Trivy is set up as a GitHub Action and runs against each PR. 
-            
+
             This will be setup automatically for all services provisioned from the Terra Java Service Template
     - ordinal: 3
       name: Monitoring
@@ -260,7 +260,7 @@
               Basic steps to remediate failures (restart)
               Basic steps to run a smoke test
               Team contacts in case of emergency
-            
+
             General Terra Playbook:
             https://docs.google.com/document/d/1KUdZBrnedzCCYQTNNmUCn_NVgTvfVKby_dyU7Laq5g0/edit
         - id: has_continuous_deliver_and_release
@@ -297,14 +297,14 @@
           description: >
             Provide design documents and architecture diagram to Compliance Team (Sarah T and Lila L) for their review.
             New services that are deemed to impact the existing Terra security boundary may be subject to additional documentation and testing requirements.
-            
+
             (Manual Attestation)
         - id: has_session_logout_and_timeout
           name: Component has Session Logout and Timeout
           description: >
             User interfaces have a logout button that performs a hard logout whereby users 
             are required to re-enter their credentials in order to regain access to the system. 
-            
+
             This is facilitated with Terra UI code.
 
             (This will not be applicable to all services, and might be hard to check for programmatically)
@@ -313,9 +313,9 @@
           description: >
             For services on GCP, this should be satisfied by using the cloudsql proxy.
             For Azure services all database connections must be private.
-            
+
             Database connections should use SSL and be password protected.
-            
+
             All of this should be inherited from DevOps' tooling and practices.
         - id: supports_auth_domains_or_sensitive_data_flagging
           name: Component supports Auth Domains or Sensitive Data Flagging
@@ -349,8 +349,3 @@
              Allow users to edit/modify such PII at will or by request.
 
             (manual attestation)
-
-
-
-        
-            

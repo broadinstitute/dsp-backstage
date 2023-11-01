@@ -19,12 +19,9 @@ collects: # An array of fact extractor configuration describing how to collect S
         path: /README.md # The file for which existence will be determined.
       - name: foundation_exists # Label for the data element.
         path: /foundation.yaml
-  - factName:
-      java_service_runs_tests_on_prs_fact
+  - factName: java_service_runs_tests_on_prs_fact
     type: regex
     path: /.github/workflows/build-and-test.yml
     regex:
       # matches the pattern run: ./gradlew <ARGS> test in a github actions workflow
       '\s*run:\s*\.\/gradlew.*test'
-      
-
