@@ -1,6 +1,6 @@
 ---
 frequency:
-  cron: '0 * * * *' # Defines a schedule for when the facts defined in this file should be collected
+  cron: '* * * * *' # Defines a schedule for when the facts defined in this file should be collected
   # This is optional and if omitted, facts will only be collected on demand.
 filter: # A filter specifying which entities to collect the specified facts for
   kind: 'Component'
@@ -22,7 +22,8 @@ collects: # An array of fact extractor configuration describing how to collect S
   - factName:
       java_service_runs_tests_on_prs_fact
     type: regex
-    path: /.github/workflows/build-and-test.yaml
-    regex: .*gradlew.*test.*
+    path: /.github/workflows/build-and-test.yml
+    regex: 
+      '.*gradlew.*test.*'
       
 

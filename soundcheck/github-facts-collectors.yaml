@@ -1,6 +1,6 @@
 ---
 frequency:
-  cron: '0 * * * *'
+  cron: '* * * * *'
 filter:
   kind: 'Component'
 cache:
