@@ -1,6 +1,6 @@
 ---
 frequency:
-  cron: '* * * * *' # Defines a schedule for when the facts defined in this file should be collected
+  cron: '0 * * * *' # Defines a schedule for when the facts defined in this file should be collected
   # This is optional and if omitted, facts will only be collected on demand.
 filter: # A filter specifying which entities to collect the specified facts for
   kind: 'Component'
