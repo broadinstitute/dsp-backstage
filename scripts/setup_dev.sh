@@ -1,5 +1,4 @@
 #!/usr/bin/env sh
-set -eo pipefail
 
 # test if vault is installed
 if ! command -v vault &> /dev/null

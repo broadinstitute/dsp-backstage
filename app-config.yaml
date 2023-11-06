@@ -48,12 +48,12 @@ integrations:
     #   apiBaseUrl: https://ghe.example.net/api/v3
     #   token: ${GHE_TOKEN}
 
-proxy:
-  ### Example for how to add a proxy endpoint for the frontend.
-  ### A typical reason to do this is to handle HTTPS and CORS for internal services.
-  # '/test':
-  #   target: 'https://example.com'
-  #   changeOrigin: true
+# proxy:
+### Example for how to add a proxy endpoint for the frontend.
+### A typical reason to do this is to handle HTTPS and CORS for internal services.
+# '/test':
+#   target: 'https://example.com'
+#   changeOrigin: true
 
 # Reference documentation http://backstage.io/docs/features/techdocs/configuration
 # Note: After experimenting with basic setup, use CI/CD to generate docs
@@ -80,7 +80,14 @@ spotify:
 
 soundcheck:
   programs:
-    $include: ./soundcheck-programs.yaml
+    $include: ./soundcheck/soundcheck-programs.yaml
+  checks:
+    $include: ./soundcheck/soundcheck-checks.yaml
+  collectors:
+    github:
+      $include: ./soundcheck/github-facts-collectors.yaml
+    scm:
+      $include: ./soundcheck/scm-facts-collectors.yaml
 
 scaffolder:
   # see https://backstage.io/docs/features/software-templates/configuration for software template options

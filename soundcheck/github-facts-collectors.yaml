@@ -1,0 +1,12 @@
+---
+frequency:
+  cron: '0 * * * *'
+filter:
+  kind: 'Component'
+cache:
+  duration:
+    hours: 2
+collects:
+  - factName: repo_details
+    type: RepositoryDetails
+    cache: true
