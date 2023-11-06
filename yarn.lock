@@ -2628,18 +2628,16 @@
     zod "^3.21.4"
 
 "@backstage/core-plugin-api@^1.5.3", "@backstage/core-plugin-api@^1.6.0":
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/@backstage/core-plugin-api/-/core-plugin-api-1.6.0.tgz#15c30f01c79e82756e5c286675f8801195538afb"
-  integrity sha512-B3X9vJ8IRMY4+FCnWAgeYJhtcQJmoLvn6JzqilODtM70UfT2sBQ3UBMP/J4SPUMA15kbzi6D1x1BhHhkWd+A/w==
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/@backstage/core-plugin-api/-/core-plugin-api-1.7.0.tgz#652ec473aa22d8dede35c90159284c522667ffb5"
+  integrity sha512-nbwcC1BoS0y4mcVzGXtv6/JWkMT/6hvA91zHHGYkQ8bc0Gs6bHz/0AoSBTP8Rou+Dxf12ZYftuGCMbeQLz5s3Q==
   dependencies:
-    "@backstage/config" "^1.1.0"
+    "@backstage/config" "^1.1.1"
     "@backstage/types" "^1.1.1"
-    "@backstage/version-bridge" "^1.0.5"
+    "@backstage/version-bridge" "^1.0.6"
     "@types/react" "^16.13.1 || ^17.0.0"
     history "^5.0.0"
     i18next "^22.4.15"
-    prop-types "^15.7.2"
-    zen-observable "^0.10.0"
 
 "@backstage/errors@^1.2.1", "@backstage/errors@^1.2.2", "@backstage/errors@^1.2.3":
   version "1.2.3"
@@ -3769,17 +3767,10 @@
   resolved "https://registry.yarnpkg.com/@backstage/types/-/types-1.1.1.tgz#c9ccb30357005e7fb5fa2ac140198059976eb076"
   integrity sha512-1cUGu+FwiJZCBOuecd0BOhIRkQYllb+7no9hHhxpAsx/DvsPGMVQMGOMvtdTycdT9SQ5MuSyFwI9wpXp2DwVvQ==
 
-"@backstage/version-bridge@^1.0.4":
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/@backstage/version-bridge/-/version-bridge-1.0.4.tgz#04623e5a57a6df9f84237f62b999d2503f874150"
-  integrity sha512-rIsZpdqGzlhgqj/7tXk6qxsCzOoLBpNYYB3d5zkodNFbjVnQlz8qLYir68Q9z7mznhScr8wNaCCZSlGvxznN5g==
-  dependencies:
-    "@types/react" "^16.13.1 || ^17.0.0"
-
-"@backstage/version-bridge@^1.0.5":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@backstage/version-bridge/-/version-bridge-1.0.5.tgz#0e63b41c01b736a903c96663a339e120ee6dcdbc"
-  integrity sha512-vu4LphP1l1mP1eMqRr31QhQwS7wkXJqnD3MXI1CqoE4Hl9Ru+6v1znqZNP9F8M7QUDpe6iJH1+gGBS/OyNrOPQ==
+"@backstage/version-bridge@^1.0.4", "@backstage/version-bridge@^1.0.5", "@backstage/version-bridge@^1.0.6":
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/@backstage/version-bridge/-/version-bridge-1.0.6.tgz#87ec80d930421f44c0554e226fc2d9282c2f5358"
+  integrity sha512-30bYWdbggedNMZ08JPIu/CXhmzSxORA2qcgyd1vbbndjYpWEmOJr4G7THO2EAM8eYk90eENVvL49i7dkGvFnJg==
   dependencies:
     "@types/react" "^16.13.1 || ^17.0.0"
 
