@@ -1,5 +1,5 @@
 import React from 'react';
-//@ts-ignore
+// @ts-ignore
 import { FieldProps, FieldValidation } from '@rjsf/core';
 import {
   FormControl,
