@@ -6473,6 +6473,17 @@
     lodash-es "^4.17.21"
     react-is "^18.2.0"
 
+"@rjsf/utils@^5.14.1":
+  version "5.14.1"
+  resolved "https://registry.yarnpkg.com/@rjsf/utils/-/utils-5.14.1.tgz#28b557b5228d1f314b4c5928eb92c6b33f090129"
+  integrity sha512-/Yukt3gMLOzY5QXz3AISN6GSplzy12rSWl3Sggi+zuCPQg5S97/k5iY0E9zLDo7AKdyjj2h5pfC8sfcHfgmfIw==
+  dependencies:
+    json-schema-merge-allof "^0.8.1"
+    jsonpointer "^5.0.1"
+    lodash "^4.17.21"
+    lodash-es "^4.17.21"
+    react-is "^18.2.0"
+
 "@rjsf/validator-ajv8@5.13.6":
   version "5.13.6"
   resolved "https://registry.yarnpkg.com/@rjsf/validator-ajv8/-/validator-ajv8-5.13.6.tgz#208ef507ab4272875a73d4bb986497a28c2abbe8"
@@ -8566,7 +8577,7 @@
   resolved "https://registry.yarnpkg.com/@types/range-parser/-/range-parser-1.2.4.tgz#cd667bcfdd025213aafb7ca5915a932590acdcdc"
   integrity sha512-EEhsLsD6UsDM1yFhAvy0Cjr6VwmpMWqFBCb9w07wVugF7w9nfajxLuVmngTIpgS6svCnm6Vaw+MZhoDCKnOfsw==
 
-"@types/react-dom@*", "@types/react-dom@<18.0.0", "@types/react-dom@^17":
+"@types/react-dom@*", "@types/react-dom@<18.0.0":
   version "17.0.22"
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-17.0.22.tgz#34317e08be27b33fa9e7cdb56125b22538261bad"
   integrity sha512-wHt4gkdSMb4jPp1vc30MLJxoWGsZs88URfmt3FRXoOEYrrqK3I8IuZLE/uFBb4UT6MRfI0wXFu4DS7LS0kUC7Q==
