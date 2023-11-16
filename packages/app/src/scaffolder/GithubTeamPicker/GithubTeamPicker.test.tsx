@@ -1,7 +1,7 @@
 import { Entity } from '@backstage/catalog-model';
 import { CatalogApi, catalogApiRef } from '@backstage/plugin-catalog-react';
 import { renderInTestApp, TestApiProvider } from '@backstage/test-utils';
-import { FieldProps, IdSchema } from '@rjsf/core';
+import { IdSchema } from '@rjsf/utils';
 import { fireEvent } from '@testing-library/react';
 import React from 'react';
 import { GithubTeamPicker } from './GithubTeamPicker';
@@ -31,7 +31,7 @@ describe('<GithubTeamPicker />', () => {
   const rawErrors: string[] = [];
   const formData = undefined;
 
-  let props: FieldProps;
+  let props: FieldExtensionComponentProps<any, any>;
 
   const catalogApi: jest.Mocked<CatalogApi> = {
     getLocationById: jest.fn(),
@@ -70,7 +70,8 @@ describe('<GithubTeamPicker />', () => {
         rawErrors,
         formData,
         idSchema,
-      } as unknown as FieldProps<any>;
+      } as unknown as FieldExtensionComponentProps<any, any>;
+      catalogApi.getEntities.mockResolvedValue({ items: entities });
       catalogApi.getEntities.mockResolvedValue({ items: entities });
     });
 

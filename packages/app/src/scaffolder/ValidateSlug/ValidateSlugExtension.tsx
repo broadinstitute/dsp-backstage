@@ -1,5 +1,5 @@
 import React from 'react';
-import { FieldProps, FieldValidation } from '@rjsf/core';
+import { FieldProps, FieldValidation } from '@rjsf/utils';
 import {
   FormControl,
   FormHelperText,
@@ -17,7 +17,7 @@ export const ValidateSlug = ({
     <FormControl
       margin="normal"
       required={required}
-      error={rawErrors?.length > 0 && !formData}
+      error={rawErrors !== undefined && rawErrors.length > 0 && !formData}
     >
       <InputLabel htmlFor="validateSlug">Project Slug</InputLabel>
       <Input
