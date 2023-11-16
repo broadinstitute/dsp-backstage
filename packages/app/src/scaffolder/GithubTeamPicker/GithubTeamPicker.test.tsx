@@ -5,7 +5,10 @@ import { IdSchema } from '@rjsf/utils';
 import { fireEvent } from '@testing-library/react';
 import React from 'react';
 import { GithubTeamPicker } from './GithubTeamPicker';
-import { FieldExtensionComponentProps, FieldExtensionUiSchema } from '@backstage/plugin-scaffolder-react';
+import {
+  FieldExtensionComponentProps,
+  FieldExtensionUiSchema,
+} from '@backstage/plugin-scaffolder-react';
 
 const makeEntity = (kind: string, name: string, namespace: string) => ({
   apiVersion: 'scaffolder.backstage.io/v1beta3',
