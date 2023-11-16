@@ -66,7 +66,7 @@ describe('<GithubTeamPicker />', () => {
         onChange,
         schema,
         required,
-        uiSchema: uiSchema as FieldExtensionUiSchema<any, any>,
+        uiSchema,
         rawErrors,
         formData,
         idSchema,
