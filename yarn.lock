@@ -5994,9 +5994,9 @@
   integrity sha512-AanzbulOHljrku1NGfafxdpTCfw2ENaWzH01N2vqQM+cUFbk868Cgh0xylz0JIM9BoKbfI++bdD6EYX0Q/UTEw==
 
 "@octokit/webhooks@^10.0.0":
-  version "10.9.1"
-  resolved "https://registry.yarnpkg.com/@octokit/webhooks/-/webhooks-10.9.1.tgz#4674a6924567419d7d0187a8b6c88ec468a97a86"
-  integrity sha512-5NXU4VfsNOo2VSU/SrLrpPH2Z1ZVDOWFcET4EpnEBX1uh/v8Uz65UVuHIRx5TZiXhnWyRE9AO1PXHa+M/iWwZA==
+  version "10.9.2"
+  resolved "https://registry.yarnpkg.com/@octokit/webhooks/-/webhooks-10.9.2.tgz#1b1e79a70fa5b22a3149b18432cbf3f39dbcb544"
+  integrity sha512-hFVF/szz4l/Y/GQdKxNmQjUke0XJXK986p+ucIlubTGVPVtVtup5G1jarQfvCMBs9Fvlf9dvH8K83E4lefmofQ==
   dependencies:
     "@octokit/request-error" "^3.0.0"
     "@octokit/webhooks-methods" "^3.0.0"
@@ -8577,10 +8577,10 @@
   resolved "https://registry.yarnpkg.com/@types/range-parser/-/range-parser-1.2.4.tgz#cd667bcfdd025213aafb7ca5915a932590acdcdc"
   integrity sha512-EEhsLsD6UsDM1yFhAvy0Cjr6VwmpMWqFBCb9w07wVugF7w9nfajxLuVmngTIpgS6svCnm6Vaw+MZhoDCKnOfsw==
 
-"@types/react-dom@*", "@types/react-dom@<18.0.0":
-  version "17.0.22"
-  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-17.0.22.tgz#34317e08be27b33fa9e7cdb56125b22538261bad"
-  integrity sha512-wHt4gkdSMb4jPp1vc30MLJxoWGsZs88URfmt3FRXoOEYrrqK3I8IuZLE/uFBb4UT6MRfI0wXFu4DS7LS0kUC7Q==
+"@types/react-dom@*", "@types/react-dom@<18.0.0", "@types/react-dom@^17":
+  version "17.0.25"
+  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-17.0.25.tgz#e0e5b3571e1069625b3a3da2b279379aa33a0cb5"
+  integrity sha512-urx7A7UxkZQmThYA4So0NelOVjx3V4rNFVJwp0WZlbIK5eM4rNJDiN3R/E9ix0MBh6kAEojk/9YL+Te6D9zHNA==
   dependencies:
     "@types/react" "^17"
 
@@ -9477,6 +9477,7 @@ anymatch@^3.0.3, anymatch@~3.1.2:
     "@material-ui/icons" "^4.9.1"
     "@material-ui/lab" "^4.0.0-alpha.61"
     "@rjsf/core" "^5.12.1"
+    "@rjsf/utils" "^5.14.1"
     "@spotify/backstage-plugin-soundcheck" "^0.8.2"
     history "^5.0.0"
     react "^17.0.2"
