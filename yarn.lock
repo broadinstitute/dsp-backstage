@@ -2319,7 +2319,7 @@
     winston "^3.2.1"
     zod "^3.21.4"
 
-"@backstage/catalog-client@^1.4.4", "@backstage/catalog-client@^1.4.5", "@backstage/catalog-client@^1.4.6":
+"@backstage/catalog-client@^1.4.4", "@backstage/catalog-client@^1.4.6":
   version "1.4.6"
   resolved "https://registry.yarnpkg.com/@backstage/catalog-client/-/catalog-client-1.4.6.tgz#35f6478879e921dd1ad939a60ba84f3515ee8ba9"
   integrity sha512-3fXKI+Ht/r1eDJUsr7VSYSSqE3nVBTe0jBPsswf6stlUb34rR+I7GXnVaFIVWv3wPAZaG+PUShq3oTsGFE5lHA==
@@ -2636,7 +2636,7 @@
     "@material-ui/icons" "^4.9.1"
     "@types/react" "^16.13.1 || ^17.0.0"
 
-"@backstage/integration@^1.7.0", "@backstage/integration@^1.7.1", "@backstage/integration@^1.7.2":
+"@backstage/integration@^1.7.1", "@backstage/integration@^1.7.2":
   version "1.7.2"
   resolved "https://registry.yarnpkg.com/@backstage/integration/-/integration-1.7.2.tgz#209b49e3ff6cce0531b8a1ef3b6387a7a740c701"
   integrity sha512-4BW0h7Hwr27TvVoZ1RArMGB1RghmAKbUzVRdDMEAO9buYNuAkpMWvpzV6srpU9DfE7gH+9fnH3BbrGNrL5OjRA==
@@ -3126,7 +3126,7 @@
     qs "^6.10.1"
     react-use "^17.2.4"
 
-"@backstage/plugin-permission-common@^0.7.10", "@backstage/plugin-permission-common@^0.7.8", "@backstage/plugin-permission-common@^0.7.9":
+"@backstage/plugin-permission-common@^0.7.10", "@backstage/plugin-permission-common@^0.7.8":
   version "0.7.10"
   resolved "https://registry.yarnpkg.com/@backstage/plugin-permission-common/-/plugin-permission-common-0.7.10.tgz#0169967f9f5ebf042e49c558aff6bfee6583524b"
   integrity sha512-E9vWuPbn/Qskg1x4o6dFMMgOVo5ZFEEiMpmAEz4+kuo/XwaKTQFLj5bbA9QwL4iUObeG3Y8GATlTICp3L0Ekbw==
@@ -7178,20 +7178,21 @@
     tiny-invariant "^1.3.1"
 
 "@spotify/backstage-plugin-soundcheck-backend-module-github@^0.4.1":
-  version "0.4.1"
-  resolved "https://registry.yarnpkg.com/@spotify/backstage-plugin-soundcheck-backend-module-github/-/backstage-plugin-soundcheck-backend-module-github-0.4.1.tgz#55e2946a30d3e07f830f6ba3642b6413e3ff0cac"
-  integrity sha512-r+vVbCD1gkh/Mnb2Wd62J7VrCaC5dFHgJmch4JYgwJDxVk9LY39++n4SwaYxoO8oIm3zjh1mzaeCM/Ae4dfgCg==
+  version "0.4.4"
+  resolved "https://registry.yarnpkg.com/@spotify/backstage-plugin-soundcheck-backend-module-github/-/backstage-plugin-soundcheck-backend-module-github-0.4.4.tgz#865bf87460cebac2d58e15fcbf8c554b3d8a01f8"
+  integrity sha512-qS19fJ3dx0gPH4D8z0jNRdGjtg5T0tzXsG4sBGcMnGudvK+ftFKWAXlgfMpg+18SaP225/HgkxvjrU+XK+hiOw==
   dependencies:
-    "@backstage/backend-common" "^0.19.5"
-    "@backstage/catalog-model" "^1.4.2"
-    "@backstage/config" "^1.1.0"
-    "@backstage/errors" "^1.2.2"
-    "@backstage/integration" "^1.7.0"
+    "@backstage/backend-common" "^0.19.9"
+    "@backstage/backend-plugin-api" "^0.6.7"
+    "@backstage/catalog-model" "^1.4.3"
+    "@backstage/config" "^1.1.1"
+    "@backstage/errors" "^1.2.3"
+    "@backstage/integration" "^1.7.2"
     "@backstage/types" "^1.1.1"
     "@octokit/request-error" "^5.0.0"
     "@octokit/rest" "^20.0.0"
-    "@spotify/backstage-plugin-soundcheck-common" "^0.8.1"
-    "@spotify/backstage-plugin-soundcheck-node" "^0.4.2"
+    "@spotify/backstage-plugin-soundcheck-common" "^0.9.1"
+    "@spotify/backstage-plugin-soundcheck-node" "^0.4.4"
     git-url-parse "^13.0.0"
     lodash "^4.17.21"
     winston "^3.2.1"
@@ -7274,39 +7275,28 @@
     luxon "^3.1.1"
     zod "^3.20.0"
 
-"@spotify/backstage-plugin-soundcheck-common@^0.9.0":
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/@spotify/backstage-plugin-soundcheck-common/-/backstage-plugin-soundcheck-common-0.9.0.tgz#82fe6c5d543b4c6e23c0f2e41c0482f97295202b"
-  integrity sha512-qnfdNyaGL5y+gIFZhtHIvLTManTRln/PeUjZniB+A7RHcXn2ytnOFZJ+Iq/GcE6UjGvmik7GGoZjNNu8ewpR5g==
+"@spotify/backstage-plugin-soundcheck-common@^0.9.0", "@spotify/backstage-plugin-soundcheck-common@^0.9.1":
+  version "0.9.1"
+  resolved "https://registry.yarnpkg.com/@spotify/backstage-plugin-soundcheck-common/-/backstage-plugin-soundcheck-common-0.9.1.tgz#585738b7debdfeab70cd7f2053c2d68cc73add3e"
+  integrity sha512-veUGi1V1t2B1BZHvyZQPzfduARybVFYyKC5A9pkRXgUDDgfzluO4Tu86GocZE2AQhWUZoGCkr23M92QKsiaEgA==
   dependencies:
-    "@backstage/catalog-client" "^1.4.5"
+    "@backstage/catalog-client" "^1.4.6"
     "@backstage/catalog-model" "^1.4.3"
-    "@backstage/plugin-permission-common" "^0.7.9"
+    "@backstage/plugin-permission-common" "^0.7.10"
     "@backstage/types" "^1.1.1"
     graphql-tag "^2.12.3"
     lodash "^4.17.21"
     luxon "^3.1.1"
     zod "^3.20.0"
 
-"@spotify/backstage-plugin-soundcheck-node@^0.4.2":
-  version "0.4.2"
-  resolved "https://registry.yarnpkg.com/@spotify/backstage-plugin-soundcheck-node/-/backstage-plugin-soundcheck-node-0.4.2.tgz#f20653d7c2271fffb2ff14bfd4bf9ff13c3b1615"
-  integrity sha512-nAOpjox0ztygwQpjjJQzQrVEynvZ7ZeN5XwrU2tCXFX7xrM3/9c91sQuhN88TDed3verUHDg5Q/b1zksBjA00A==
-  dependencies:
-    "@backstage/catalog-model" "^1.4.2"
-    "@backstage/types" "^1.1.1"
-    "@spotify/backstage-plugin-soundcheck-common" "^0.8.1"
-    luxon "^3.1.1"
-    zod "^3.20.0"
-
-"@spotify/backstage-plugin-soundcheck-node@^0.4.3":
-  version "0.4.3"
-  resolved "https://registry.yarnpkg.com/@spotify/backstage-plugin-soundcheck-node/-/backstage-plugin-soundcheck-node-0.4.3.tgz#add476c42c1067c4bc7b999ec9e0d82431ed2448"
-  integrity sha512-gEkqxde8reivHO5XP3hjbGM5qu80e93lUh1ytgPK48JP8RCcvXCbymUcJAcSuN8jsk5VlxKr0x9T62yKM3habg==
+"@spotify/backstage-plugin-soundcheck-node@^0.4.2", "@spotify/backstage-plugin-soundcheck-node@^0.4.3", "@spotify/backstage-plugin-soundcheck-node@^0.4.4":
+  version "0.4.4"
+  resolved "https://registry.yarnpkg.com/@spotify/backstage-plugin-soundcheck-node/-/backstage-plugin-soundcheck-node-0.4.4.tgz#ab5ea42087990a8faba09ff99d719324212041e2"
+  integrity sha512-Cym8Xf5w1a7WXK7oQ8AhcVDBv3mdtPdVZkkb4eO63yDBxrX20qaxZhLsWWw97PIKMXB4mnz5HkOuYbPyI7jH2A==
   dependencies:
     "@backstage/catalog-model" "^1.4.3"
     "@backstage/types" "^1.1.1"
-    "@spotify/backstage-plugin-soundcheck-common" "^0.9.0"
+    "@spotify/backstage-plugin-soundcheck-common" "^0.9.1"
     luxon "^3.1.1"
     zod "^3.20.0"
 
@@ -8577,10 +8567,10 @@
   resolved "https://registry.yarnpkg.com/@types/range-parser/-/range-parser-1.2.4.tgz#cd667bcfdd025213aafb7ca5915a932590acdcdc"
   integrity sha512-EEhsLsD6UsDM1yFhAvy0Cjr6VwmpMWqFBCb9w07wVugF7w9nfajxLuVmngTIpgS6svCnm6Vaw+MZhoDCKnOfsw==
 
-"@types/react-dom@*", "@types/react-dom@<18.0.0":
-  version "17.0.22"
-  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-17.0.22.tgz#34317e08be27b33fa9e7cdb56125b22538261bad"
-  integrity sha512-wHt4gkdSMb4jPp1vc30MLJxoWGsZs88URfmt3FRXoOEYrrqK3I8IuZLE/uFBb4UT6MRfI0wXFu4DS7LS0kUC7Q==
+"@types/react-dom@*", "@types/react-dom@<18.0.0", "@types/react-dom@^17":
+  version "17.0.25"
+  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-17.0.25.tgz#e0e5b3571e1069625b3a3da2b279379aa33a0cb5"
+  integrity sha512-urx7A7UxkZQmThYA4So0NelOVjx3V4rNFVJwp0WZlbIK5eM4rNJDiN3R/E9ix0MBh6kAEojk/9YL+Te6D9zHNA==
   dependencies:
     "@types/react" "^17"
 
@@ -9477,6 +9467,7 @@ anymatch@^3.0.3, anymatch@~3.1.2:
     "@material-ui/icons" "^4.9.1"
     "@material-ui/lab" "^4.0.0-alpha.61"
     "@rjsf/core" "^5.12.1"
+    "@rjsf/utils" "^5.14.1"
     "@spotify/backstage-plugin-soundcheck" "^0.8.2"
     history "^5.0.0"
     react "^17.0.2"
