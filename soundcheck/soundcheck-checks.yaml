@@ -47,3 +47,67 @@
     path: $.matches
     operator: equal
     value: true
+# Terra Prod Readiness Checks
+
+- id: has_team_ownership_defined
+  rule:
+    factRef: catalog:default/entity_descriptor
+    path: $.spec.owner
+    operator: matches
+    value: '^[a-zA-Z0-9-_]+$'
+  schedule:
+    frequency:
+      cron: '* * * * *'
+    filter:
+      kind: 'Component'
+- id: has_service_documentation
+  rule:
+    factRef: scm:default/architecture_diagrams_exist_fact
+    path: $.architecture.md_exists
+    operator: equal
+    value: true
+- id: follows_semantic_versioning
+  rule:
+    factRef: scm:default/follows_semantic_versioning_fact
+    path: $.matches
+    operator: equal
+    value: true
+- id: is_containerized
+  rule:
+    any:
+      - factRef: scm:default/dockerfile_exists_fact
+        path: $.dockerfile_exists
+        operator: equal
+        value: true
+      - factRef: scm:default/uses_jib_for_image_build_fact
+        path: $.matches
+        operator: equal
+        value: true
+- id: prs_require_two_reviews
+  rule:
+    factRef: github:main/branch_protections
+    path: $.required_pull_request_reviews.required_approving_review_count
+    operator: greaterThanInclusive
+    value: 2
+- id: has_unit_tests
+  rule:
+    all:
+      - factRef: scm:default/java_service_runs_tests_on_prs_fact
+        path: $.matches
+        operator: equal
+        value: true
+- id: has_contract_tests
+  rule:
+    all:
+      - factRef: scm:default/can_run_pact_tests_fact
+        path: $.matches
+        operator: equal
+        value: true
+- id: has_static_code_analysis
+  rule:
+    all:
+      - factRef: scm:default/can_run_sonar_scans_on_prs_fact
+        path: $.matches
+        operator: equal
+        value: true
+

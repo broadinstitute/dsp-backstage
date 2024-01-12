@@ -1,12 +1,12 @@
 ---
 frequency:
-  cron: '0 * * * *' # Defines a schedule for when the facts defined in this file should be collected
+  cron: '*/5 * * * *' # Defines a schedule for when the facts defined in this file should be collected
   # This is optional and if omitted, facts will only be collected on demand.
 filter: # A filter specifying which entities to collect the specified facts for
   kind: 'Component'
-cache: # Defines if the collected facts should be cached, and if so for how long
-  duration:
-    hours: 2
+# cache: # Defines if the collected facts should be cached, and if so for how long
+#   duration:
+#     hours: 2
 collects: # An array of fact extractor configuration describing how to collect SCM facts.
   - factName:
       readme_and_foundation_files_exist_fact # This gives this fact an identifier which is
@@ -25,3 +25,37 @@ collects: # An array of fact extractor configuration describing how to collect S
     regex:
       # matches the pattern run: ./gradlew <ARGS> test in a github actions workflow
       '\s*run:\s*\.\/gradlew.*test'
+  - factName: architecture_diagrams_exist_fact
+    type: exists
+    data:
+      - name: architecture.md_exists
+        path: /architecture.md
+  - factName: follows_semantic_versioning_fact
+    type: regex
+    path: /.github/workflows/tag.yml
+    regex:
+      # Ensure the repo is using standard bumper action for version tagging
+      '\s*uses:\s*databiosphere\/github-actions\/actions\/bumper'
+  - factName: dockerfile_exists_fact
+    type: exists
+    data:
+      - name: dockerfile_exists
+        path: /Dockerfile
+  - factName: uses_jib_for_image_build_fact
+    type: regex
+    path: /.github/workflows/publish.yml
+    regex:
+      # matches the pattern run: ./gradlew <ARGS> jib in a github actions workflow
+      '\s*run:\s*\|\s*\.\/gradlew.*jib'
+  - factName: can_run_pact_tests_fact
+    type: regex
+    path: /service/build.gradle
+    regex:
+      # parses the gradle build file and looks for a task named pactTests
+      '\s*tasks\.register\("pactTests"'
+  - factName: can_run_sonar_scans_on_prs_fact
+    type: regex
+    path: /.github/workflows/build-and-test.yml
+    regex:
+      # parses the gradle build file and looks for a task named sonarqube
+      '\s*run:\s*\.\/gradlew.*sonar'
