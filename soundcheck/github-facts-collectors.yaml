@@ -10,3 +10,9 @@ collects:
   - factName: repo_details
     type: RepositoryDetails
     cache: true
+  - factName: branch_protections
+    frequency:
+      cron: '*/5 * * * *' 
+    type: BranchProtections
+    cache: false
+    branch: main 

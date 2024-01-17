@@ -76,7 +76,8 @@
             1. Service-level architecture and design (text and diagrams that describe the app-level architecture, workflow, data flow, and user flow)
             2. System-level architecture and design (service’s infrastructure elements and how it fits within the larger Terra system including interactions with other Terra services, handoffs of data, user tokens, authentication, etc. between services)
 
-            (Not sure how to collect this programmatically, so for now this is a manual check)
+            To satisfy this requirement, the service should have an architecture.md file in the root of the repo that either contains this information or links to it.
+
         - id: added_to_terra_architecture_diagram
           name: Component is added to Terra Architecture Diagram
           description: >
@@ -88,7 +89,8 @@
           description: >
             Component follows Semantic Versioning
             https://semver.org/
-            This will be satisfied automatically if the component was provisioned from the Terra Java Service Template
+            This will be satisfied automatically if the component was provisioned from the Terra Java Service Template. This check verifies that DSP's bumper github action is used
+            in the service tagging github workflow
         - id: is_containerized
           name: Component is Containerized
           description: >
@@ -96,7 +98,7 @@
             This will be satisfied automatically if the component was provisioned from the Terra Java Service Template
             Can be accomplished by adding a Dockerfile to the root of the repo or having a jib step as part of the gradle build
             Base image must be from the approved list at us.gcr.io/broad-dsp-gcr-public/base
-        - id: prs_require_2_reviews
+        - id: prs_require_two_reviews
           name: PRs To Component Repo Require 2 Reviews
           description: >
             PRs To Component Repo Require 2 Reviews
@@ -105,7 +107,9 @@
           name: All Changes Require a Jira Ticket
           description: >
             All PR Changes to Production code Require a Jira Ticket
-            (Not sure how to collect this programmatically, so for now this is a manual check)
+            Might be able to satisfy this by checking for the presence of a Jira ticket number in the PR title
+            (borrow the validation from juniper https://github.com/broadinstitute/juniper/blob/development/.github/workflows/require-ticket.yml)
+            and add to java template
         - id: follows_secret_management_practices
           name: Follow Reccomended Secret Management Practices
           description: >
@@ -159,6 +163,7 @@
             End-to-end tests are run in pre-production environments, covering key user journeys supported by this component.
 
             (Not sure how to collect this programmatically, so for now this is a manual check, do any of our services actually have this right now?)
+            The Java Template repo has an example of a test-runner test but that is still the direction we want to take.
         - id: has_static_code_analysis
           name: Component has Static Code Analysis
           description: >
