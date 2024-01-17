@@ -23,7 +23,9 @@ import {
 
 export const GithubTeamPicker: (
   props: LegacyFieldExtensionComponentProps<any, any>,
-) => React.JSX.Element = (props: LegacyFieldExtensionComponentProps<any, any>) => {
+) => React.JSX.Element = (
+  props: LegacyFieldExtensionComponentProps<any, any>,
+) => {
   const {
     onChange,
     schema: { title = 'Github Team', description = 'Select a Github Team' },
