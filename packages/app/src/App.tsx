@@ -10,7 +10,8 @@ import {
   CatalogImportPage,
   catalogImportPlugin,
 } from '@backstage/plugin-catalog-import';
-import { ScaffolderPage, scaffolderPlugin } from '@backstage/plugin-scaffolder';
+import { scaffolderPlugin } from '@backstage/plugin-scaffolder';
+import { LegacyScaffolderPage } from '@backstage/plugin-scaffolder/alpha';
 import { orgPlugin } from '@backstage/plugin-org';
 import { SearchPage } from '@backstage/plugin-search';
 import { TechRadarPage } from '@backstage/plugin-tech-radar';
@@ -95,7 +96,7 @@ const routes = (
         <ReportIssue />
       </TechDocsAddons>
     </Route>
-    <Route path="/create" element={<ScaffolderPage />}>
+    <Route path="/create" element={<LegacyScaffolderPage />}>
       <ScaffolderFieldExtensions>
         <GithubTeamPickerExtension />
         <ValidateSlugExtension />

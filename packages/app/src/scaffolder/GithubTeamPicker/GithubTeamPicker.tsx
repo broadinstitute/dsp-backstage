@@ -17,13 +17,15 @@ import React, { useCallback, useEffect } from 'react';
 import useAsync from 'react-use/lib/useAsync';
 import { scaffolderPlugin } from '@backstage/plugin-scaffolder';
 import {
-  createScaffolderFieldExtension,
-  FieldExtensionComponentProps,
-} from '@backstage/plugin-scaffolder-react';
+  createLegacyScaffolderFieldExtension,
+  LegacyFieldExtensionComponentProps,
+} from '@backstage/plugin-scaffolder-react/alpha';
 
 export const GithubTeamPicker: (
-  props: FieldExtensionComponentProps<any, any>,
-) => React.JSX.Element = (props: FieldExtensionComponentProps<any, any>) => {
+  props: LegacyFieldExtensionComponentProps<any, any>,
+) => React.JSX.Element = (
+  props: LegacyFieldExtensionComponentProps<any, any>,
+) => {
   const {
     onChange,
     schema: { title = 'Github Team', description = 'Select a Github Team' },
@@ -143,7 +145,7 @@ export const GithubTeamPicker: (
 };
 
 export const GithubTeamPickerExtension = scaffolderPlugin.provide(
-  createScaffolderFieldExtension({
+  createLegacyScaffolderFieldExtension({
     name: 'GithubTeamPicker',
     component: GithubTeamPicker,
   }),
