@@ -291,6 +291,16 @@ spec:
                   "autoplan": {
                     "enabled": true
                   }
+                },
+                {
+                  "name": "${{parameters.projectSlug}}-qa",
+                  "dir": "${{parameters.projectSlug}}",
+                  "workflow": "./tfvars/$WORKSPACE.tfvars",
+                  "workspace": "qa",
+                  "terraform_version": "v1.5.7",
+                  "autoplan": {
+                    "enabled": true
+                  }
                 }
               ]
             } |
