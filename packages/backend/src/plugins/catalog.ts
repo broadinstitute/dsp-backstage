@@ -1,4 +1,4 @@
-import { CatalogBuilder } from '@backstage/plugin-catalog-backend';
+import { CatalogBuilder, CodeOwnersProcessor } from '@backstage/plugin-catalog-backend';
 import { ScaffolderEntitiesProcessor } from '@backstage/plugin-scaffolder-backend';
 import {
   GithubEntityProvider,
@@ -45,6 +45,10 @@ export default async function createPlugin(
     }),
   );
   builder.addProcessor(new ScaffolderEntitiesProcessor());
+  builder.addProcessor(CodeOwnersProcessor.fromConfig(env.config, {
+    logger: env.logger,
+    reader: env.reader,
+  }));
   const { processingEngine, router } = await builder.build();
   await processingEngine.start();
   return router;
