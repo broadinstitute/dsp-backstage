@@ -1,6 +1,4 @@
-import {
-  Entity,
-} from '@backstage/catalog-model';
+import { Entity } from '@backstage/catalog-model';
 import {
   useApi,
   identityApiRef,
