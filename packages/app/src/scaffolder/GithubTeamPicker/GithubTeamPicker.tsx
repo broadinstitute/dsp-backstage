@@ -53,7 +53,7 @@ export const GithubTeamPicker = (props: GithubTeamPickerProps) => {
       },
     });
 
-    const teams = items
+    const githubTeams = items
       .filter((e): e is Entity => Boolean(e))
       .map(team => ({
         label: team.metadata.title ?? team.metadata.name,
@@ -63,7 +63,7 @@ export const GithubTeamPicker = (props: GithubTeamPickerProps) => {
         }),
       }));
 
-    setTeams(teams);
+    setTeams(githubTeams);
   });
 
   const updateChange = (
