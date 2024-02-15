@@ -54,9 +54,9 @@ spec:
           title: Organization
           type: string
           description: Github organization where the repository will be created
-          default: databiosphere
+          default: DataBiosphere
           enum:
-            - databiosphere
+            - DataBiosphere
             - broadinstitute
           enumNames:
             - Data Biosphere
