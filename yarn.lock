@@ -6984,9 +6984,9 @@
     react-is "^18.2.0"
 
 "@rjsf/utils@^5.14.1":
-  version "5.14.1"
-  resolved "https://registry.yarnpkg.com/@rjsf/utils/-/utils-5.14.1.tgz#28b557b5228d1f314b4c5928eb92c6b33f090129"
-  integrity sha512-/Yukt3gMLOzY5QXz3AISN6GSplzy12rSWl3Sggi+zuCPQg5S97/k5iY0E9zLDo7AKdyjj2h5pfC8sfcHfgmfIw==
+  version "5.17.0"
+  resolved "https://registry.yarnpkg.com/@rjsf/utils/-/utils-5.17.0.tgz#baf9a108bdd8e8c7f5a3441d8e88447c3926d501"
+  integrity sha512-Hy2uAxMKWZIZSMzc2AiHrdACYvHj9GDynrdApMgUTxfjpzj5DT7Rghl/FGj7gg8Zy8VtdVNTCbkIzfS8xt4x7g==
   dependencies:
     json-schema-merge-allof "^0.8.1"
     jsonpointer "^5.0.1"
