@@ -1,7 +1,5 @@
 import {
   Entity,
-  parseEntityRef,
-  stringifyEntityRef,
 } from '@backstage/catalog-model';
 import {
   useApi,
@@ -17,17 +15,13 @@ import { Autocomplete } from '@material-ui/lab';
 import React, { useState } from 'react';
 import useAsync from 'react-use/lib/useAsync';
 import { scaffolderPlugin } from '@backstage/plugin-scaffolder';
-import {
-  createScaffolderFieldExtension,
-  FieldExtensionComponentProps,
-} from '@backstage/plugin-scaffolder-react';
-import { GithubTeamPickerProps, GithubTeamPickerSchema } from './schema';
+import { createScaffolderFieldExtension } from '@backstage/plugin-scaffolder-react';
+import { GithubTeamPickerProps } from './schema';
 
 export const GithubTeamPicker = (props: GithubTeamPickerProps) => {
   const {
     schema: { title, description },
     required,
-    uiSchema,
     rawErrors,
     onChange,
   } = props;
@@ -45,9 +39,6 @@ export const GithubTeamPicker = (props: GithubTeamPickerProps) => {
     label: string;
     ref: string;
   }>(null);
-
-  const defaultNamespace =
-    uiSchema['ui:options']?.defaultNamespace || 'default';
 
   useAsync(async () => {
     const { userEntityRef } = await identityApi.getBackstageIdentity();
