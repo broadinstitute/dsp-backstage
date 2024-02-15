@@ -13,8 +13,6 @@ import {
 } from '@backstage/core-plugin-api';
 import userEvent from '@testing-library/user-event';
 import { ScaffolderRJSFFieldProps as FieldProps } from '@backstage/plugin-scaffolder-react';
-import { on } from 'events';
-import { after } from 'node:test';
 
 const mockIdentityApi: IdentityApi = {
   getProfileInfo: () =>
