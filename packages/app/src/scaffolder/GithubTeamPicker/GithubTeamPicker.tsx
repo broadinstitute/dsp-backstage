@@ -3,7 +3,7 @@ import {
   parseEntityRef,
   stringifyEntityRef,
 } from '@backstage/catalog-model';
-import { 
+import {
   useApi,
   identityApiRef,
   errorApiRef,
@@ -61,7 +61,6 @@ export const GithubTeamPicker = (props: GithubTeamPickerProps) => {
       filter: {
         kind: 'Group',
         ['relations.hasMember']: [userEntityRef],
-
       },
     });
 
@@ -69,26 +68,25 @@ export const GithubTeamPicker = (props: GithubTeamPickerProps) => {
       .filter((e): e is Entity => Boolean(e))
       .map(team => ({
         label: team.metadata.title ?? team.metadata.name,
-        ref: humanizeEntityRef(team, { defaultKind: 'Group', defaultNamespace: 'default'}),
+        ref: humanizeEntityRef(team, {
+          defaultKind: 'Group',
+          defaultNamespace: 'default',
+        }),
       }));
 
     setTeams(teams);
-  })
+  });
 
   const updateChange = (
     _: React.ChangeEvent<{}>,
-    value: {label: string; ref: string} | null,
+    value: { label: string; ref: string } | null,
   ) => {
     setSelectedTeam(value);
     onChange(value?.ref ?? '');
   };
 
   return (
-    <FormControl
-      margin="normal"
-      required
-      error={rawErrors?.length > 0}
-    >
+    <FormControl margin="normal" required error={rawErrors?.length > 0}>
       <Autocomplete
         id="GithubTeamPicker"
         options={teams || []}
@@ -102,8 +100,8 @@ export const GithubTeamPicker = (props: GithubTeamPickerProps) => {
             margin="dense"
             required={required}
             helperText={description}
-            variant='outlined'
-            FormHelperTextProps={{ margin: 'dense', style: { marginLeft: 0} }}
+            variant="outlined"
+            FormHelperTextProps={{ margin: 'dense', style: { marginLeft: 0 } }}
           />
         )}
       />

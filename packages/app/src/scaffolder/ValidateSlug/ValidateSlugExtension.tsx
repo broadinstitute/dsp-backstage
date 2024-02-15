@@ -1,5 +1,5 @@
 import React from 'react';
-import {FieldProps, FieldValidation } from '@rjsf/utils';
+import { FieldProps, FieldValidation } from '@rjsf/utils';
 import {
   FormControl,
   FormHelperText,

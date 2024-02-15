@@ -9,15 +9,15 @@ export const GithubTeamPickerFieldSchema = makeFieldSchemaFromZod(
       .string()
       .default('Select a Github Team')
       .describe('Select a Github Team'),
-  })
-)
+  }),
+);
 
 /**
  * UI options for the Github Team Picker.
  * @public
  */
 
-export type GithubTeamPickerUiOptions = 
+export type GithubTeamPickerUiOptions =
   typeof GithubTeamPickerFieldSchema.uiOptionsType;
 
 /**
