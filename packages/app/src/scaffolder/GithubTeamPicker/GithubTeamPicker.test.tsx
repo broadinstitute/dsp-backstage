@@ -1,124 +1,194 @@
-import { Entity } from '@backstage/catalog-model';
-import { CatalogApi, catalogApiRef } from '@backstage/plugin-catalog-react';
-import { renderInTestApp, TestApiProvider } from '@backstage/test-utils';
-import { IdSchema } from '@rjsf/utils';
-import { fireEvent } from '@testing-library/react';
 import React from 'react';
+import { render, waitFor } from '@testing-library/react';
+import { CatalogApi } from '@backstage/catalog-client';
 import { GithubTeamPicker } from './GithubTeamPicker';
-import { FieldExtensionComponentProps } from '@backstage/plugin-scaffolder-react';
+import { TestApiProvider } from '@backstage/test-utils';
+import { catalogApiRef } from '@backstage/plugin-catalog-react';
+import { Entity } from '@backstage/catalog-model';
+import {
+  ErrorApi,
+  IdentityApi,
+  errorApiRef,
+  identityApiRef,
+} from '@backstage/core-plugin-api';
+import userEvent from '@testing-library/user-event';
+import { ScaffolderRJSFFieldProps as FieldProps } from '@backstage/plugin-scaffolder-react';
 
-const makeEntity = (kind: string, name: string, namespace: string) => ({
-  apiVersion: 'scaffolder.backstage.io/v1beta3',
-  kind,
-  metadata: {
-    name,
-    namespace,
-    annotations: {
-      'github.com/team-slug': `my-org/${name}`,
-    },
-  },
-});
+const mockIdentityApi: IdentityApi = {
+  getProfileInfo: () =>
+    Promise.resolve({
+      displayName: 'Bob',
+      email: 'bob@example.com',
+      picture: 'https://example.com/picture.jpg',
+    }),
+  getBackstageIdentity: () =>
+    Promise.resolve({
+      id: 'Bob',
+      idToken: 'token',
+      type: 'user',
+      userEntityRef: 'user:default/bob',
+      ownershipEntityRefs: ['group:default/group1', 'group:default/group2'],
+    }),
+  getCredentials: () => Promise.resolve({ token: 'token' }),
+  signOut: () => Promise.resolve(),
+};
 
 describe('<GithubTeamPicker />', () => {
   let entities: Entity[];
   const onChange = jest.fn();
   const schema = {};
   const required = false;
-  let uiSchema: FieldExtensionComponentProps<any, any>['uiSchema'];
-  const idSchema: FieldExtensionComponentProps<any, any>['idSchema'] = {
-    $id: 'test',
-  } as IdSchema<any>;
-  const rawErrors: string[] = [];
-  const formData = undefined;
-
-  let props: FieldExtensionComponentProps<any, any>;
 
   const catalogApi: jest.Mocked<CatalogApi> = {
-    getLocationById: jest.fn(),
     getEntities: jest.fn(async () => ({ items: entities })),
-    addLocation: jest.fn(),
-    getLocationByRef: jest.fn(),
-    removeEntityByUid: jest.fn(),
-    getEntityByRef: jest.fn(),
   } as any;
 
-  let Wrapper: React.ComponentType<React.PropsWithChildren<{}>>;
+  const mockErrorApi: jest.Mocked<ErrorApi> = {
+    post: jest.fn(),
+    error$: jest.fn(),
+  };
 
   beforeEach(() => {
     entities = [
-      makeEntity('Group', 'default', 'team-a'),
-      makeEntity('Group', 'default', 'team-b'),
+      {
+        apiVersion: 'backstage.io/v1alpha1',
+        kind: 'Group',
+        metadata: { name: 'group1' },
+        spec: { members: ['Bob'] },
+      },
+      {
+        apiVersion: 'backstage.io/v1alpha1',
+        kind: 'Group',
+        metadata: { name: 'group2' },
+        spec: { members: ['Bob'] },
+      },
+      {
+        apiVersion: 'backstage.io/v1alpha1',
+        kind: 'Group',
+        metadata: { name: 'group3' },
+        spec: { members: ['Alice'] },
+      },
     ];
 
-    Wrapper = ({ children }: { children?: React.ReactNode }) => (
-      <TestApiProvider apis={[[catalogApiRef, catalogApi]]}>
-        {children}
-      </TestApiProvider>
+    onChange.mockClear();
+    catalogApi.getEntities.mockClear();
+  });
+
+  afterEach(() => {
+    jest.resetAllMocks();
+  });
+
+  it('should only return teams the user is a member of', async () => {
+    const teams = entities.filter(
+      entity =>
+        entity.spec &&
+        Array.isArray(entity.spec.members) &&
+        entity.spec.members.includes('Bob'),
+    );
+
+    catalogApi.getEntities.mockResolvedValue({ items: teams });
+    const props = {
+      onChange,
+      schema,
+      required,
+    } as unknown as FieldProps<string>;
+
+    render(
+      <TestApiProvider
+        apis={[
+          [identityApiRef, mockIdentityApi],
+          [catalogApiRef, catalogApi],
+          [errorApiRef, mockErrorApi],
+        ]}
+      >
+        <GithubTeamPicker {...props} />
+      </TestApiProvider>,
+    );
+
+    await waitFor(() =>
+      expect(catalogApi.getEntities).toHaveBeenCalledTimes(1),
+    );
+
+    expect(catalogApi.getEntities).toHaveBeenCalledWith({
+      filter: {
+        kind: 'Group',
+        'relations.hasMember': ['user:default/bob'],
+      },
+    });
+
+    await expect(catalogApi.getEntities.mock.results[0].value).resolves.toEqual(
+      {
+        items: [
+          {
+            apiVersion: 'backstage.io/v1alpha1',
+            kind: 'Group',
+            metadata: { name: 'group1' },
+            spec: { members: ['Bob'] },
+          },
+          {
+            apiVersion: 'backstage.io/v1alpha1',
+            kind: 'Group',
+            metadata: { name: 'group2' },
+            spec: { members: ['Bob'] },
+          },
+        ],
+      },
+    );
+
+    await expect(
+      catalogApi.getEntities.mock.results[0].value,
+    ).resolves.not.toEqual(
+      expect.objectContaining({
+        items: expect.arrayContaining([
+          expect.objectContaining({
+            metadata: { name: 'group3' },
+          }),
+        ]),
+      }),
     );
   });
 
-  afterEach(() => jest.resetAllMocks());
+  it('should display the github teams the user is a part of', async () => {
+    const userTeams = entities.filter(
+      entity =>
+        entity.spec &&
+        Array.isArray(entity.spec.members) &&
+        entity.spec.members.includes('Bob'),
+    );
 
-  describe('with default options', () => {
-    beforeEach(() => {
-      uiSchema = {};
-      props = {
-        onChange,
-        schema,
-        required,
-        uiSchema,
-        rawErrors,
-        formData,
-        idSchema,
-      } as unknown as FieldExtensionComponentProps<any, any>;
-      catalogApi.getEntities.mockResolvedValue({ items: entities });
-      catalogApi.getEntities.mockResolvedValue({ items: entities });
-    });
+    catalogApi.getEntities.mockResolvedValue({ items: userTeams });
 
-    it('searches for groups', async () => {
-      await renderInTestApp(
-        <Wrapper>
-          <GithubTeamPicker {...props} />
-        </Wrapper>,
-      );
+    const props = {
+      onChange,
+      schema,
+      required,
+    } as unknown as FieldProps<string>;
 
-      expect(catalogApi.getEntities).toHaveBeenCalledWith(
-        { filter: { kind: ['Group'] } },
-        undefined,
-      );
-    });
+    const { queryByText, getByRole } = render(
+      <TestApiProvider
+        apis={[
+          [identityApiRef, mockIdentityApi],
+          [catalogApiRef, catalogApi],
+          [errorApiRef, mockErrorApi],
+        ]}
+      >
+        <GithubTeamPicker {...props} />
+      </TestApiProvider>,
+    );
 
-    it('shows the team slug to users', async () => {
-      const { getByRole } = await renderInTestApp(
-        <Wrapper>
-          <GithubTeamPicker {...props} />
-          <div data-test-id="outside">Outside</div>
-        </Wrapper>,
-      );
+    await waitFor(() =>
+      expect(catalogApi.getEntities).toHaveBeenCalledTimes(1),
+    );
 
-      const input = getByRole('textbox');
-      // open the autocomplete dropdown
-      fireEvent.click(input);
-      // select the first option
-      fireEvent.change(input, { target: { value: 'my-org/team-a' } });
+    const inputField = getByRole('combobox');
+    await userEvent.click(inputField);
+    await userEvent.type(inputField, 'group');
 
-      expect(input).toHaveValue('my-org/team-a');
-    });
-
-    it('will not allow arbirtary values', async () => {
-      const { getByRole } = await renderInTestApp(
-        <Wrapper>
-          <GithubTeamPicker {...props} />
-          <div data-test-id="outside">Outside</div>
-        </Wrapper>,
-      );
-
-      const input = getByRole('textbox');
-      // try to input an invalid value
-      fireEvent.change(input, { target: { value: 'fake' } });
-      fireEvent.blur(input);
-
-      expect(input).toHaveValue('');
+    await waitFor(() => {
+      const group1Elem = queryByText('group1');
+      const group2Elem = queryByText('group2');
+      expect(group1Elem).toBeInTheDocument();
+      expect(group2Elem).toBeInTheDocument();
     });
   });
 });

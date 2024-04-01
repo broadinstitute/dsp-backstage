@@ -54,9 +54,9 @@ spec:
           title: Organization
           type: string
           description: Github organization where the repository will be created
-          default: databiosphere
+          default: DataBiosphere
           enum:
-            - databiosphere
+            - DataBiosphere
             - broadinstitute
           enumNames:
             - Data Biosphere
@@ -180,7 +180,7 @@ spec:
                   "workspace": $repoName,
                   "terraform_version": "v1.1.1",
                   "autoplan": {
-                    "enabled": true
+                    "enabled": false
                   }
                 }
               ]
@@ -287,6 +287,16 @@ spec:
                   "dir": "${{parameters.projectSlug}}",
                   "workflow": "./tfvars/$WORKSPACE.tfvars",
                   "workspace": "dev",
+                  "terraform_version": "v1.5.7",
+                  "autoplan": {
+                    "enabled": true
+                  }
+                },
+                {
+                  "name": "${{parameters.projectSlug}}-qa",
+                  "dir": "${{parameters.projectSlug}}",
+                  "workflow": "./tfvars/$WORKSPACE.tfvars",
+                  "workspace": "qa",
                   "terraform_version": "v1.5.7",
                   "autoplan": {
                     "enabled": true

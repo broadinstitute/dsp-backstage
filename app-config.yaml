@@ -79,6 +79,12 @@ spotify:
   licenseKey: ${BACKSTAGE_LICENSE_KEY}
 
 soundcheck:
+  results:
+    history:
+      enable: true
+  certifications:
+    history:
+      enable: true
   programs:
     $include: ./soundcheck/soundcheck-programs.yaml
   checks:
