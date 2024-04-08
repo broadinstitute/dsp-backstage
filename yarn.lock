@@ -2555,14 +2555,13 @@
     typescript-json-schema "^0.62.0"
     yaml "^2.0.0"
 
-"@backstage/config@^1.0.8", "@backstage/config@^1.1.0", "@backstage/config@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@backstage/config/-/config-1.1.1.tgz#824ef3d74b391579060d5646fa1f45fcd553ce02"
-  integrity sha512-H+xZbIVvstrkVnfxZFH6JB3Gb5qUIb8DjHOakHUlDX7xEIXjQnaM3Kf85RtnHu0uYpFIpB29i8FI68Y/uLeqyw==
+"@backstage/config@^1.0.8", "@backstage/config@^1.1.0", "@backstage/config@^1.1.1", "@backstage/config@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@backstage/config/-/config-1.2.0.tgz#6a4d93197d0586ee3a40f9e4877c5cfd76c128f3"
+  integrity sha512-tW8hNzDTClotYmpOrUrutymzZ0Zimx/WeU2+5tLv+ZI8ssRV64KGRe8hi7PuQz2lARVF1DxjwV//Bq2VjR5veA==
   dependencies:
-    "@backstage/errors" "^1.2.3"
+    "@backstage/errors" "^1.2.4"
     "@backstage/types" "^1.1.1"
-    lodash "^4.17.21"
 
 "@backstage/core-app-api@^1.11.3":
   version "1.11.3"
@@ -2650,10 +2649,10 @@
     "@types/react" "^16.13.1 || ^17.0.0"
     history "^5.0.0"
 
-"@backstage/errors@^1.2.1", "@backstage/errors@^1.2.2", "@backstage/errors@^1.2.3":
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/@backstage/errors/-/errors-1.2.3.tgz#6418d3ece63b13d14e32d44ec4db0f8866b0b1c9"
-  integrity sha512-3YtYRKLNeRaSCzKSikNFoemesacDoEY0UwZAq7lnzCCpiCpSCfg7UA4y7wfjadFFU9Pd6nckUg2BzOk9keL15w==
+"@backstage/errors@^1.2.1", "@backstage/errors@^1.2.2", "@backstage/errors@^1.2.3", "@backstage/errors@^1.2.4":
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/@backstage/errors/-/errors-1.2.4.tgz#2ba79c6308e87b0de99edf499e1c82477d3d6e8a"
+  integrity sha512-JBhKn9KwZTzp/AaOC0vBncKCM1vI9Z8rKKyr9vj3wt3SSgCnDPxNwVz7SlXa2Rc9TOQq0Yk3olkmQE9U+S5uWg==
   dependencies:
     "@backstage/types" "^1.1.1"
     serialize-error "^8.0.1"
@@ -2707,16 +2706,17 @@
     "@types/react" "^16.13.1 || ^17.0.0"
 
 "@backstage/integration@^1.7.1", "@backstage/integration@^1.7.2", "@backstage/integration@^1.8.0":
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/@backstage/integration/-/integration-1.8.0.tgz#affc54e1c12c5a4e68a92de4e42c6cf001bdf6ec"
-  integrity sha512-FCFOubvpKK2dt38sNATrImHrS0pkmvS2LPzvLQ01JzRy5F/QxsdRGxJmzB9irpLOUh7F3/Ilr7cBdG5nYyYVOA==
+  version "1.9.1"
+  resolved "https://registry.yarnpkg.com/@backstage/integration/-/integration-1.9.1.tgz#31d98720383792a2bfd633274da7d1b49f9f49c4"
+  integrity sha512-/xPtUvJFcdwDGoa0QRQQG8d7CR/zvwzZaPpjcSmi/qhRtjT5lvNvnQte/kYAi5Rl1tvb+vXoKJSdUDtTdAWprw==
   dependencies:
     "@azure/identity" "^4.0.0"
-    "@backstage/config" "^1.1.1"
+    "@backstage/config" "^1.2.0"
+    "@backstage/errors" "^1.2.4"
     "@octokit/auth-app" "^4.0.0"
     "@octokit/rest" "^19.0.3"
     cross-fetch "^4.0.0"
-    git-url-parse "^13.0.0"
+    git-url-parse "^14.0.0"
     lodash "^4.17.21"
     luxon "^3.0.0"
 
@@ -14976,6 +14976,13 @@ git-url-parse@13.1.0, git-url-parse@^13.0.0:
   version "13.1.0"
   resolved "https://registry.yarnpkg.com/git-url-parse/-/git-url-parse-13.1.0.tgz#07e136b5baa08d59fabdf0e33170de425adf07b4"
   integrity sha512-5FvPJP/70WkIprlUZ33bm4UAaFdjcLkJLpWft1BeZKqwR0uhhNGoKwlUaPtVb4LxCSQ++erHapRak9kWGj+FCA==
+  dependencies:
+    git-up "^7.0.0"
+
+git-url-parse@^14.0.0:
+  version "14.0.0"
+  resolved "https://registry.yarnpkg.com/git-url-parse/-/git-url-parse-14.0.0.tgz#18ce834726d5fbca0c25a4555101aa277017418f"
+  integrity sha512-NnLweV+2A4nCvn4U/m2AoYu0pPKlsmhK9cknG7IMwsjFY1S2jxM+mAhsDxyxfCIGfGaD+dozsyX4b6vkYc83yQ==
   dependencies:
     git-up "^7.0.0"
 
