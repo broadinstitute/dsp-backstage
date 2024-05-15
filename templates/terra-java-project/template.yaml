@@ -29,6 +29,7 @@ spec:
           description: Unique name of the project. This will be used in the repository name and in the docker image name.
           ui:placholder: terra-javatemplate-service
           ui:autofocus: true
+          ui:field: ValidateRepo
         projectSlug:
           title: Project Slug
           type: string
