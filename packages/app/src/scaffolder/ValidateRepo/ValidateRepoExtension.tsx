@@ -1,6 +1,11 @@
-import React from "react";
-import { FieldProps, FieldValidation } from "@rjsf/utils";
-import { FormControl, FormHelperText, Input, InputLabel } from "@material-ui/core";
+import React from 'react';
+import { FieldProps, FieldValidation } from '@rjsf/utils';
+import {
+  FormControl,
+  FormHelperText,
+  Input,
+  InputLabel,
+} from '@material-ui/core';
 
 export const ValidateRepo = ({
   onChange,
@@ -18,14 +23,15 @@ export const ValidateRepo = ({
       <Input
         id="validateRepo"
         aria-describedby="entityName"
-        onChange={(e) => onChange(e.target?.value)}
+        onChange={e => onChange(e.target?.value)}
       />
       <FormHelperText id="entityName">
-        Project repository name must be lowercase and contain only letters, numbers, and hyphens
-      </FormHelperText>   
+        Project repository name must be lowercase and contain only letters,
+        numbers, and hyphens
+      </FormHelperText>
     </FormControl>
   );
-}
+};
 
 export const repoValidation = (value: string, validation: FieldValidation) => {
   // Regex check for single word with no spaces or dashes
@@ -33,7 +39,7 @@ export const repoValidation = (value: string, validation: FieldValidation) => {
 
   if (!validRepo) {
     validation.addError(
-      "Project repository name must be lowercase and contain only letters, numbers, and hyphens",
+      'Project repository name must be lowercase and contain only letters, numbers, and hyphens',
     );
   }
 };
