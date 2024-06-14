@@ -179,7 +179,7 @@ spec:
                   "dir": "github",
                   "workflow": "./tfvars/$WORKSPACE.tfvars",
                   "workspace": $repoName,
-                  "terraform_version": "v1.1.1",
+                  "terraform_version": "v1.8.1",
                   "autoplan": {
                     "enabled": false,
                     "when_modified": ["modules", "'*.tf'", "tfvars/" & $repoName & ".tfvars"]
@@ -289,7 +289,7 @@ spec:
                   "dir": "${{parameters.projectSlug}}",
                   "workflow": "./tfvars/$WORKSPACE.tfvars",
                   "workspace": "dev",
-                  "terraform_version": "v1.5.7",
+                  "terraform_version": "v1.8.1",
                   "autoplan": {
                     "enabled": true
                   }
@@ -299,7 +299,7 @@ spec:
                   "dir": "${{parameters.projectSlug}}",
                   "workflow": "./tfvars/$WORKSPACE.tfvars",
                   "workspace": "qa",
-                  "terraform_version": "v1.5.7",
+                  "terraform_version": "v1.8.1",
                   "autoplan": {
                     "enabled": true
                   }
